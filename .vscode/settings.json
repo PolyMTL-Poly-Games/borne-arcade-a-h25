@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "A24 Borne Arcade - Équipe A.sln"
+    "dotnet.defaultSolution": "BorneArcade.sln"
 }
