@@ -64,6 +64,11 @@ public class BatBehavior : MonoBehaviour
                 Die();
                 collision.gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, 10f); // Bounce player up
             }
+            else
+            {
+                // Damage the player
+                Debug.Log("Player hit by bat!");
+            }
         }
     }
 
