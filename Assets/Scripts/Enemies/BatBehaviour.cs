@@ -10,6 +10,7 @@ public class BatBehavior : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rb;
     private bool isDead = false;
+    public float waitTime = 1f;
     private SpriteRenderer spriteRenderer;
 
     void Start()
