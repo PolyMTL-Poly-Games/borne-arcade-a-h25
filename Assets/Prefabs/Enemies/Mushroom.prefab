@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8602332190220303798}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PatrolEdgeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4064237826384562418}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PatrolEdgeRight
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -71,9 +71,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3051578236001288562}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mushroom
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 1187243908602847119}
   - component: {fileID: 1086587388999934158}
   - component: {fileID: 2272205157460353620}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MushroomSprite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
