@@ -19,10 +19,14 @@ public class SkullBossBehavior : MonoBehaviour
     private int particleCount = 12; // Number of particles in 360-degree burst
     [SerializeField]
     private float particleSpeed = 5f; // Speed of each particle
-    private int hitNumber = 0; // Number of hit for boss
     [SerializeField]
     private int maxLife = 3;
+    private GameObject[] hearts;
     private bool enragedState;
+    [SerializeField]
+    private GameObject heartPrefab; // Prefab for heart indicator
+    [SerializeField]
+    private Transform heartsParent; // Parent transform for hearts
     public Transform player;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -34,6 +38,8 @@ public class SkullBossBehavior : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         StartCoroutine(CycleState());
+        InitializeHearts();
+
     }
 
     private void Update()
@@ -118,23 +124,64 @@ public class SkullBossBehavior : MonoBehaviour
             // Damage the skull when the player jumps on it
             if (collision.transform.position.y > transform.position.y + 0.5f)
             {
-                Die();
+                Debug.Log("Player hit skull!");
+                TakeDamage();
                 collision.gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(50f, 30f); // Bounce player up
             }
+
             else
             {
                 // Damage the player
                 Debug.Log("Player hit by skull!");
             }
         }
+        else if (collision.gameObject.CompareTag("RedParticle"))
+        {
+            Debug.Log("Player hit fire ball");
+        }
     }
 
     private void Die()
     {
-        hitNumber++;
         animator.SetTrigger("Hit");
-        if (hitNumber == maxLife)
-            // Disable skull after hit animation
-            Destroy(gameObject, 0.5f); // Delay to let the animation play
+        // Disable skull after hit animation
+        Destroy(gameObject, 0.5f); // Delay to let the animation play
     }
+
+    private void TakeDamage()
+    {
+        if (maxLife > 0)
+        {
+            animator.SetTrigger("Hit");
+            maxLife--;
+            UpdateHearts();
+        }
+
+        if (maxLife <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void InitializeHearts()
+    {
+        hearts = new GameObject[maxLife];
+        float[] xPositions = { -3.17f, -1.6f, 0f };
+
+        for (int i = 0; i < maxLife; i++)
+        {
+            GameObject heart = Instantiate(heartPrefab, heartsParent);
+            heart.transform.localPosition = new Vector3(xPositions[i], 0, 0);
+            hearts[i] = heart;
+        }
+    }
+
+    private void UpdateHearts()
+    {
+        if (maxLife >= 0 && maxLife < hearts.Length)
+        {
+            hearts[maxLife].GetComponent<Animator>().SetTrigger("Lose");
+        }
+    }
+
 }
