@@ -9,6 +9,10 @@ public class GhostBehavior : MonoBehaviour
     private float disappearDuration = 3f; // Time ghost stays invisible
     [SerializeField]
     private float appearDuration = 5f; // Time ghost stays visible
+    [SerializeField]
+    private Transform leftEdge; // Left patrol edge
+    [SerializeField]
+    private Transform rightEdge; // Right patrol edge
 
     private bool isVisible = true; // State of the ghost
     private SpriteRenderer spriteRenderer;
@@ -35,22 +39,20 @@ public class GhostBehavior : MonoBehaviour
 
     private void Move()
     {
-        if (direction > 0)
-        {
-            spriteRenderer.flipX = true; // Face right
-        }
-        else
-        {
-            spriteRenderer.flipX = false; // Face left
-        }
+        // Flip the sprite based on direction
+        spriteRenderer.flipX = direction > 0;
 
+        // Move the ghost
         transform.Translate(Vector2.right * moveSpeed * direction * Time.deltaTime);
 
-        // logic to flip direction at edges
-        RaycastHit2D edgeCheck = Physics2D.Raycast(transform.position + Vector3.right * direction, Vector2.down, 1f);
-        if (!edgeCheck.collider)
+        // Reverse direction if reaching patrol edges
+        if (transform.position.x >= rightEdge.position.x && direction > 0)
         {
-            direction *= -1; // Flip direction
+            direction = -1f; // Start moving left
+        }
+        else if (transform.position.x <= leftEdge.position.x && direction < 0)
+        {
+            direction = 1f; // Start moving right
         }
     }
 
