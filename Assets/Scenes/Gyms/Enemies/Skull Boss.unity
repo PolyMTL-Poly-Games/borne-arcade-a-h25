@@ -1111,6 +1111,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2958938116954596220, guid: d37aaa7602b52364c8a869cc0a1628f4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 3588311113383864327, guid: d37aaa7602b52364c8a869cc0a1628f4, type: 3}
       propertyPath: player
       value: 
