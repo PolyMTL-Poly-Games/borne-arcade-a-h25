@@ -3,30 +3,20 @@ using System.Collections;
 
 public class SkullBossBehavior : MonoBehaviour
 {
-    [SerializeField]
-    private float enragedDuration = 8f; // Time skull stays enraged
-    [SerializeField]
-    private float passiveDuration = 5f; // Time skull stays passive
-    [SerializeField]
-    private GameObject redParticlePrefab; // Prefab for red particle projectile
-    [SerializeField]
-    private float followSpeed = 2f;
-    [SerializeField]
-    private float detectionRange = 8f;
-    [SerializeField]
-    private float shootInterval = 1f; // Time between particle bursts
-    [SerializeField]
-    private int particleCount = 12; // Number of particles in 360-degree burst
-    [SerializeField]
-    private float particleSpeed = 5f; // Speed of each particle
+    [SerializeField] private float enragedDuration = 8f; // Time skull stays enraged
+    [SerializeField] private float passiveDuration = 5f; // Time skull stays passive
+    [SerializeField] private GameObject redParticlePrefab; // Prefab for red particle projectile
+    [SerializeField] private float followSpeed = 2f;
+    [SerializeField] private float detectionRange = 8f;
+    [SerializeField] private float shootInterval = 1f; // Time between particle bursts
+    [SerializeField] private int particleCount = 12; // Number of particles in 360-degree burst
+    [SerializeField] private float particleSpeed = 5f; // Speed of each particle
     [SerializeField]
     private int maxLife = 3;
     private GameObject[] hearts;
     private bool enragedState;
-    [SerializeField]
-    private GameObject heartPrefab; // Prefab for heart indicator
-    [SerializeField]
-    private Transform heartsParent; // Parent transform for hearts
+    [SerializeField] private GameObject heartPrefab; // Prefab for heart indicator
+    [SerializeField] private Transform heartsParent; // Parent transform for hearts
     public Transform player;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;

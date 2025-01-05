@@ -3,16 +3,11 @@ using System.Collections;
 
 public class GhostBehavior : MonoBehaviour
 {
-    [SerializeField]
-    private float moveSpeed = 2f; // Movement speed
-    [SerializeField]
-    private float disappearDuration = 3f; // Time ghost stays invisible
-    [SerializeField]
-    private float appearDuration = 5f; // Time ghost stays visible
-    [SerializeField]
-    private Transform leftEdge; // Left patrol edge
-    [SerializeField]
-    private Transform rightEdge; // Right patrol edge
+    [SerializeField] private float moveSpeed = 2f; // Movement speed
+    [SerializeField] private float disappearDuration = 3f; // Time ghost stays invisible
+    [SerializeField] private float appearDuration = 5f; // Time ghost stays visible
+    [SerializeField] private Transform leftEdge; // Left patrol edge
+    [SerializeField] private Transform rightEdge; // Right patrol edge
 
     private bool isVisible = true; // State of the ghost
     private SpriteRenderer spriteRenderer;

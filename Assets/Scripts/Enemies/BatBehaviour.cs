@@ -2,10 +2,8 @@ using UnityEngine;
 
 public class BatBehavior : MonoBehaviour
 {
-    [SerializeField]
-    private float followSpeed = 2f;
-    [SerializeField]
-    private float detectionRange = 8f;
+    [SerializeField] private float followSpeed = 2f;
+    [SerializeField] private float detectionRange = 8f;
     public Transform player;
     private Animator animator;
     private Rigidbody2D rb;

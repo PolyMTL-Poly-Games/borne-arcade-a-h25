@@ -2,18 +2,15 @@ using UnityEngine;
 
 public class SlimeBehavior : MonoBehaviour
 {
-    [SerializeField]
-    private float followSpeed = 2f;
-    [SerializeField]
-    private float detectionRange = 8f;
+    [SerializeField] private float followSpeed = 2f;
+    [SerializeField] private float detectionRange = 8f;
     public Transform player;
     private Animator animator;
     private Rigidbody2D rb;
     private bool isDead = false;
     public float waitTime = 1f; // Wait time between jumps
     private SpriteRenderer spriteRenderer;
-    [SerializeField]
-    private float jumpForce = 5f; // Jump force for the slime
+    [SerializeField] private float jumpForce = 5f; // Jump force for the slime
     private bool isGrounded = true; // Check if the slime is grounded
     private float jumpCooldown = 1f; // Cooldown between jumps
     private float lastJumpTime;
