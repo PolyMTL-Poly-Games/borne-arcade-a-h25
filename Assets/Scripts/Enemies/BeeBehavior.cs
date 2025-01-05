@@ -34,11 +34,17 @@ public class BeeBehavior : MonoBehaviour
             if (canAttack)
             {
                 animator.SetTrigger("Attack");
-                Shoot();
+                StartCoroutine(WaitAndShoot());
                 canAttack = false;
                 lastAttackTime = Time.time;
             }
         }
+    }
+
+    private IEnumerator WaitAndShoot()
+    {
+        yield return new WaitForSeconds(1f);
+        Shoot();
     }
 
     private void Move()
@@ -61,7 +67,7 @@ public class BeeBehavior : MonoBehaviour
     {
         GameObject stingInstance = Instantiate(stingPrefab, stingSpawnPoint.position, stingSpawnPoint.rotation);
         Rigidbody2D rb = stingInstance.GetComponent<Rigidbody2D>();
-        rb.linearVelocity = new Vector2(direction * stingSpeed, 0);
+        rb.linearVelocity = new Vector2(0, -stingSpeed);
         Destroy(stingInstance, 3f);
     }
     private void CheckAttackCooldown()
