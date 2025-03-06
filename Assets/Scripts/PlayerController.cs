@@ -92,7 +92,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Besoin de fix certains bugs
     private void HandleMovementAnimation(float moveInput)
     {
         if ((moveInput > 0 && !isFacingRight) || (moveInput < 0 && isFacingRight))
@@ -101,7 +100,7 @@ public class PlayerController : MonoBehaviour
         }
 
         animator.SetFloat("isRunning", Math.Abs(moveInput));
-        animator.SetBool("isFalling", rb.linearVelocity.y < 0 && Math.Abs(moveInput) > 0);
+        animator.SetBool("isFalling", rb.linearVelocity.y < 0);
         animator.SetBool("isJumping", !isGrounded);
         animator.SetBool("isHoldingWall", canWallJump && Math.Abs(moveInput) > 0);
     }
