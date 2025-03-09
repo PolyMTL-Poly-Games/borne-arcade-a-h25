@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
             else if (jumpCount < maxJumpCount)
             {
                 Jump();
+                anim.SetTrigger("wallJump");
             }
         }
     }
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour
 
         // Lock movement for a short duration to prevent player from sticking on wall when maintaining input
         Invoke("AllowAirControl", wallJumpLockTime);
+        jumpCount = 0;
     }
 
     private void AllowAirControl()

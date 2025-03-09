@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform player;
-    public float smoothSpeed = 0.125f;  // Smoothness of the camera movement
+    [SerializeField] private float smoothSpeed = 0.125f;  // Smoothness of the camera movement
+    private Transform player;
+
+    void Awake()
+    {
+        player = GameObject.FindWithTag("Player")?.transform;
+    }
 
     void LateUpdate()
     {
