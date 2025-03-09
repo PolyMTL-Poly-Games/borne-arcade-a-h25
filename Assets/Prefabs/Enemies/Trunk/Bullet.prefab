@@ -176,5 +176,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPiecePrefab: {fileID: 6835777259343517808, guid: 722bcc208b89ea84993df89822f88a69, type: 3}
-  pieceCount: 3
-  explosionRadius: 15
+  pieceCount: 5
+  explosionRadius: 20

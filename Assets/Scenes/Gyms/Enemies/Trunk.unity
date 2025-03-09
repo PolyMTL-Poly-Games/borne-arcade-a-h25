@@ -294,8 +294,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7804c2e8187d6b4caf909317a3f8d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whatIsTerrain:
+    serializedVersion: 2
+    m_Bits: 256
+  wallCheck: {fileID: 0}
+  groundCheck: {fileID: 0}
   moveSpeed: 10
   jumpForce: 20
+  wallPushForce: 10
+  maxJumpCount: 2
+  wallJumpLockTime: 0.2
+  enemyKnockbackForce: 30
+  enemyKnockbackUpwardForce: 20
 --- !u!1 &777162429
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +453,7 @@ GameObject:
   - component: {fileID: 1043693616}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

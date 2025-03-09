@@ -20,12 +20,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float wallPushForce = 10f;
     [SerializeField] private int maxJumpCount = 2;
     [SerializeField] private float wallJumpLockTime = 0.2f;
+    [SerializeField] private float enemyKnockbackForce = 30f;
+    [SerializeField] private float enemyKnockbackUpwardForce = 20f;
 
     private Animator anim;
     private Rigidbody2D rb;
     private bool isFacingRight = true;
 
-    private bool hasAirControl = true;
+    private bool hasControl = true;
     private int jumpCount = 0;
 
     void Awake()
@@ -53,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move(float moveInput, bool hasPressedJump)
     {
-        if (isGrounded || hasAirControl)
+        if (hasControl)
         {
             rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
             HandleFacing(moveInput);
@@ -87,20 +89,20 @@ public class PlayerController : MonoBehaviour
 
     private void WallJump()
     {
-        hasAirControl = false;
+        hasControl = false;
         if (isFacingRight)
             rb.linearVelocity = new Vector2(-wallPushForce, jumpForce);
         else
             rb.linearVelocity = new Vector2(wallPushForce, jumpForce);
 
         // Lock movement for a short duration to prevent player from sticking on wall when maintaining input
-        Invoke("AllowAirControl", wallJumpLockTime);
+        Invoke("AllowControl", wallJumpLockTime);
         jumpCount = 0;
     }
 
-    private void AllowAirControl()
+    private void AllowControl()
     {
-        hasAirControl = true;
+        hasControl = true;
     }
 
     private void HandleFacing(float move)
@@ -176,5 +178,21 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("vSpeed", rb.linearVelocity.y);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("isHoldingWall", !isGrounded && isTouchingWall && Math.Abs(moveInput) > 0);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") && !(collision.relativeVelocity.y > 0))
+        {
+            Vector2 knockbackDirection = (transform.position.x > collision.transform.position.x) ? Vector2.right : Vector2.left;
+            Vector2 knockback = new Vector2(knockbackDirection.x * enemyKnockbackForce, enemyKnockbackUpwardForce);
+
+            rb.linearVelocity = knockback;
+
+            hasControl = false;
+            Invoke("AllowControl", wallJumpLockTime);
+
+            anim.SetTrigger("isHit");
+        }
     }
 }
