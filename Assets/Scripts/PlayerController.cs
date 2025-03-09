@@ -47,9 +47,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        isGrounded = false;
         isTouchingWall = false;
-
         CheckTerrain();
     }
 
@@ -82,6 +80,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        isGrounded = false;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         ++jumpCount;
     }
