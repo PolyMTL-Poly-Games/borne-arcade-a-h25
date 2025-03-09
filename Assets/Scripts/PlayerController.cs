@@ -3,113 +3,177 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-    public float jumpForce = 18f;
-    public float wallJumpPushForce = 12f;
-    public float wallJumpUpwardForce = 22f;
-    public float wallJumpLockTime = 0.1f;
+    [Header("Setup")]
+    // A mask determining what is terrain to the character
+    // Use layer 8 'Terrain', not tag!
+    [SerializeField] private LayerMask whatIsTerrain = 1 << 8;
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private Transform groundCheck;
 
-    private Animator animator;
-    private Rigidbody2D rb;
+    const float DETECTION_RADIUS = .2f;
+    private bool isTouchingWall;
     private bool isGrounded;
-    private bool canWallJump;
+
+    [Header("Player Settings")]
+    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float jumpForce = 18f;
+    [SerializeField] private float wallPushForce = 10f;
+    [SerializeField] private int maxJumpCount = 2;
+    [SerializeField] private float wallJumpLockTime = 0.2f;
+
+    private Animator anim;
+    private Rigidbody2D rb;
     private bool isFacingRight = true;
-    private Vector2 wallNormalDirection;
-    private float wallJumpLockTimer = 0f;
+
+    private bool hasAirControl = true;
+    private int jumpCount = 0;
 
     void Awake()
     {
+        wallCheck = transform.Find("WallCheck");
+        groundCheck = transform.Find("GroundCheck");
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-
-        if (wallJumpLockTimer > 0)
-        {
-            wallJumpLockTimer -= Time.deltaTime;
-        }
-
         float moveInput = Input.GetAxis("Horizontal");
+        bool hasPressedJump = Input.GetButtonDown("Jump");
 
-        HandleMovementAnimation(moveInput);
+        Move(moveInput, hasPressedJump);
+        UpdateAnimations(moveInput);
+    }
 
-        if (wallJumpLockTimer <= 0)
+    void FixedUpdate()
+    {
+        isGrounded = false;
+        isTouchingWall = false;
+
+        CheckTerrain();
+    }
+
+    private void Move(float moveInput, bool hasPressedJump)
+    {
+        if (isGrounded || hasAirControl)
+        {
             rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+            HandleFacing(moveInput);
+        }
 
-        if (Input.GetButtonDown("Jump"))
+        // If the player can jump...
+        if (isGrounded && hasPressedJump)
         {
-            if (isGrounded)
+            Jump();
+        }
+        else if (!isGrounded && hasPressedJump)
+        {
+            if (isTouchingWall)
             {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                WallJump();
             }
-            else if (canWallJump)
+            else if (jumpCount < maxJumpCount)
             {
-                PerformWallJump();
+                Jump();
             }
         }
     }
 
-    void PerformWallJump()
+    private void Jump()
     {
-        float jumpDirection = wallNormalDirection.x > 0 ? 1 : -1;
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        ++jumpCount;
+    }
 
-        rb.linearVelocity = new Vector2(jumpDirection * wallJumpPushForce, wallJumpUpwardForce);
+    private void WallJump()
+    {
+        hasAirControl = false;
+        if (isFacingRight)
+            rb.linearVelocity = new Vector2(-wallPushForce, jumpForce);
+        else
+            rb.linearVelocity = new Vector2(wallPushForce, jumpForce);
 
-        if ((jumpDirection > 0 && !isFacingRight) || (jumpDirection < 0 && isFacingRight))
+        // Lock movement for a short duration to prevent player from sticking on wall when maintaining input
+        Invoke("AllowAirControl", wallJumpLockTime);
+    }
+
+    private void AllowAirControl()
+    {
+        hasAirControl = true;
+    }
+
+    private void HandleFacing(float move)
+    {
+        if (move > 0 && !isFacingRight)
         {
             Flip();
         }
-
-        canWallJump = false;
-        wallJumpLockTimer = wallJumpLockTime; // Lock movement pendant  un moment pour empêcher joueur de stick sur mur
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-            canWallJump = false;
-        }
-        else if (collision.gameObject.CompareTag("Wall") && !isGrounded)
-        {
-            canWallJump = true;
-            wallNormalDirection = collision.GetContact(0).normal;
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
-        else if (collision.gameObject.CompareTag("Wall"))
-        {
-            canWallJump = false;
-        }
-    }
-
-    private void HandleMovementAnimation(float moveInput)
-    {
-        if ((moveInput > 0 && !isFacingRight) || (moveInput < 0 && isFacingRight))
+        else if (move < 0 && isFacingRight)
         {
             Flip();
         }
-
-        animator.SetFloat("isRunning", Math.Abs(moveInput));
-        animator.SetBool("isFalling", rb.linearVelocity.y < 0);
-        animator.SetBool("isJumping", !isGrounded);
-        animator.SetBool("isHoldingWall", canWallJump && Math.Abs(moveInput) > 0);
     }
 
     private void Flip()
     {
         isFacingRight = !isFacingRight;
+
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+    private void CheckTerrain()
+    {
+        // To prevent jumpCount = 0 when we just started jumping
+        if (rb.linearVelocity.y <= 0)
+        {
+            // Ground check
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, DETECTION_RADIUS, whatIsTerrain);
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].gameObject != gameObject)
+                {
+                    isGrounded = true;
+                    jumpCount = 0;
+                }
+            }
+        }
+
+        // Wall check
+        Collider2D[] walls = Physics2D.OverlapCircleAll(wallCheck.position, DETECTION_RADIUS, whatIsTerrain);
+        for (int i = 0; i < walls.Length; i++)
+        {
+            if (walls[i].gameObject != gameObject)
+            {
+                isTouchingWall = true;
+            }
+        }
+    }
+
+    // For Debugging: we can see detection radius
+    private void OnDrawGizmos()
+    {
+        // Draw a sphere to visualize groundRadius
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(groundCheck.position, DETECTION_RADIUS);
+        }
+
+        // Draw a sphere to visualize wallRadius
+        if (wallCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(wallCheck.position, DETECTION_RADIUS);
+        }
+    }
+
+    private void UpdateAnimations(float moveInput)
+    {
+        anim.SetFloat("hSpeed", Math.Abs(moveInput));
+        anim.SetFloat("vSpeed", rb.linearVelocity.y);
+        anim.SetBool("isGrounded", isGrounded);
+        // Need to add other animations
     }
 }

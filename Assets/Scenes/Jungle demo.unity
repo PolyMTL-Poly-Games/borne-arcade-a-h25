@@ -1274,9 +1274,9 @@ GameObject:
   - component: {fileID: 932823157}
   - component: {fileID: 932823156}
   - component: {fileID: 932823158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap
-  m_TagString: Ground
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
