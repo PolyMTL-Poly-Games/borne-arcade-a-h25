@@ -176,6 +176,6 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("hSpeed", Math.Abs(moveInput));
         anim.SetFloat("vSpeed", rb.linearVelocity.y);
         anim.SetBool("isGrounded", isGrounded);
-        // Need to add other animations
+        anim.SetBool("isHoldingWall", !isGrounded && isTouchingWall && Math.Abs(moveInput) > 0);
     }
 }
