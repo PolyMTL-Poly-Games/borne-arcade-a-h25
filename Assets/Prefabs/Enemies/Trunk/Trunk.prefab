@@ -200,10 +200,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01de38274f7747f429eb73f243658a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounceForce: 15
   bulletPrefab: {fileID: 8812921550338947463, guid: 40ce1d7f6c2d9904b8d31477a930d32a, type: 3}
   attackCooldown: 1.5
   bulletSpeed: 7.5
-  bounceForce: 15
 --- !u!1 &1933055834924055035
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +216,7 @@ GameObject:
   m_Layer: 6
   m_Name: BulletSpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
