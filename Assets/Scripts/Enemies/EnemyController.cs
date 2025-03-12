@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private float bounceForce = 15f;
+    [SerializeField] private float hitBounceForce = 15f;
     protected Animator animator;
 
     protected virtual void Awake()
@@ -41,6 +41,6 @@ public class EnemyController : MonoBehaviour
     protected void BouncePlayer(Collision2D other)
     {
         Rigidbody2D playerRb = other.gameObject.GetComponent<Rigidbody2D>();
-        playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, bounceForce);
+        playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, hitBounceForce);
     }
 }

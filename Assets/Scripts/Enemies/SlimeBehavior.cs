@@ -1,31 +1,29 @@
 using UnityEngine;
 
-public class SlimeBehavior : MonoBehaviour
+public class SlimeBehavior : EnemyController
 {
-    [SerializeField] private float followSpeed = 2f;
-    [SerializeField] private float detectionRange = 8f;
-    public Transform player;
-    private Animator animator;
+    [SerializeField] private float followSpeed = 5f;
+    [SerializeField] private float detectionRange = 15f;
+    [SerializeField] private float jumpForce = 10f;
+
+    private Transform player;
     private Rigidbody2D rb;
-    private bool isDead = false;
-    public float waitTime = 1f; // Wait time between jumps
+    public float waitTime = 1f;
     private SpriteRenderer spriteRenderer;
-    [SerializeField] private float jumpForce = 5f; // Jump force for the slime
-    private bool isGrounded = true; // Check if the slime is grounded
-    private float jumpCooldown = 1f; // Cooldown between jumps
+    private bool isGrounded = true;
+    private float jumpCooldown = 1f;
     private float lastJumpTime;
 
-    void Start()
+    protected override void Awake()
     {
-        animator = GetComponent<Animator>();
+        base.Awake();
+        player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        if (isDead) return;
-
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= detectionRange)
@@ -65,35 +63,20 @@ public class SlimeBehavior : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D other)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        base.OnCollisionEnter2D(other);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Terrain"))
         {
             // Reset grounded when touching the ground
             isGrounded = true;
         }
-
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            // Kill the slime when the player jumps on it
-            if (collision.transform.position.y > transform.position.y + 0.5f)
-            {
-                Die();
-                collision.gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, 10f); // Bounce player up
-            }
-            else
-            {
-                // Damage the player
-                Debug.Log("Player hit by slime!");
-            }
-        }
     }
 
-    void Die()
+    private void OnDrawGizmos()
     {
-        isDead = true;
-        rb.linearVelocity = Vector2.zero;
-        animator.SetTrigger("GettingHit");
-        Destroy(gameObject, 0.5f); // Delay to let the animation play
+        // Draw a sphere to visualize detection radius
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 }

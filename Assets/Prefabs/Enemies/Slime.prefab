@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6918829990406537091}
   - component: {fileID: 8407102173034925629}
   - component: {fileID: 8219230845292173070}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Slime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -198,8 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc9e6da7446e974a93ca0b197f84d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followSpeed: 4
-  detectionRange: 8
-  player: {fileID: 0}
-  waitTime: 2
+  hitBounceForce: 15
+  followSpeed: 5
+  detectionRange: 15
   jumpForce: 10
+  waitTime: 1
