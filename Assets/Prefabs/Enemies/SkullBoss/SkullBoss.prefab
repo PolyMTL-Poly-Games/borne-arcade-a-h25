@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 3588311113383864327}
   - component: {fileID: 2672180174146612446}
   m_Layer: 6
-  m_Name: Skull Boss
+  m_Name: SkullBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitBounceForce: 15
   redParticlePrefab: {fileID: 1311555431081677532, guid: 31292f10939fd0446b54a94e4f11b42e, type: 3}
+  confettiPrefab: {fileID: 6324268856477158343, guid: 81237d0fcc3a9c546b79c9885ca72690, type: 3}
   heartPrefab: {fileID: 8120951746793606408, guid: b4e1561a8731e864f9688d360b028b26, type: 3}
   enragedDuration: 8
   passiveDuration: 2

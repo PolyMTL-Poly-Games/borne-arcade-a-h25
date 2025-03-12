@@ -4,6 +4,7 @@ using System.Collections;
 public class SkullBossBehavior : EnemyController
 {
     [SerializeField] private GameObject redParticlePrefab; // Prefab for red particle projectile
+    [SerializeField] private GameObject confettiPrefab;
     [SerializeField] private GameObject heartPrefab;
     [SerializeField] private float enragedDuration = 8f; // Time skull stays enraged
     [SerializeField] private float passiveDuration = 5f; // Time skull stays passive
@@ -143,9 +144,14 @@ public class SkullBossBehavior : EnemyController
     protected override void OnHitAnimationEnd()
     {
         if (maxLife <= 0)
+        {
             base.OnHitAnimationEnd();
+            SpawnConfetti();
+        }
         else
+        {
             restartCycle();
+        }
     }
 
     private void InitializeHearts()
@@ -167,5 +173,10 @@ public class SkullBossBehavior : EnemyController
         {
             hearts[maxLife].GetComponent<Animator>().SetTrigger("lose");
         }
+    }
+
+    private void SpawnConfetti()
+    {
+        Instantiate(confettiPrefab, transform.position, Quaternion.identity);
     }
 }
