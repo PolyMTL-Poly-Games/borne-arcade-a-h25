@@ -1,14 +1,15 @@
 using UnityEngine;
 
-public class TrunkBulletController : MonoBehaviour
+public class TrunkBulletController : ProjectileController
 {
     [SerializeField] private GameObject bulletPiecePrefab;
     [SerializeField] private int pieceCount = 5;
     [SerializeField] private float explosionForce = 50f;
 
     // Note: les ennemis et les bullets s'ignorent grâce au Layer Collision Matrix. Voir Edit > Project Settings > Physics 2D
-    private void OnCollisionEnter2D(Collision2D other)
+    protected override void OnCollisionEnter2D(Collision2D other)
     {
+        base.OnCollisionEnter2D(other);
         BreakBullet();
         Destroy(gameObject);
     }

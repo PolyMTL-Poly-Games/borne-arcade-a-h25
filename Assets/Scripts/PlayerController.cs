@@ -180,20 +180,17 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isHoldingWall", !isGrounded && isTouchingWall && Math.Abs(moveInput) > 0);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    // Used by enemies and projectiles
+    public void Hurt(GameObject danger)
     {
-        bool isHurtingEnemy = rb.linearVelocity.y < 0 && transform.position.y > other.transform.position.y;
-        if (other.gameObject.CompareTag("Enemy") && !isHurtingEnemy || other.gameObject.CompareTag("Enemy projectile"))
-        {
-            Vector2 knockbackDirection = (transform.position.x > other.transform.position.x) ? Vector2.right : Vector2.left;
-            Vector2 knockback = new Vector2(knockbackDirection.x * enemyKnockbackForce, enemyKnockbackUpwardForce);
+        Vector2 knockbackDirection = (transform.position.x > danger.transform.position.x) ? Vector2.right : Vector2.left;
+        Vector2 knockback = new Vector2(knockbackDirection.x * enemyKnockbackForce, enemyKnockbackUpwardForce);
 
-            rb.linearVelocity = knockback;
+        rb.linearVelocity = knockback;
 
-            hasControl = false;
-            Invoke("AllowControl", wallJumpLockTime);
+        hasControl = false;
+        Invoke("AllowControl", wallJumpLockTime);
 
-            anim.SetTrigger("hit");
-        }
+        anim.SetTrigger("hit");
     }
 }

@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 2958938116954596220}
   - component: {fileID: 9062926076905556172}
   - component: {fileID: 8411463677862294158}
-  - component: {fileID: 7123335273105198543}
   - component: {fileID: 3588311113383864327}
-  m_Layer: 0
+  - component: {fileID: 2672180174146612446}
+  m_Layer: 6
   m_Name: Skull Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -5
   m_Sprite: {fileID: -2081236666602350228, guid: ed57a13d678b6614fa329888af09bde2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -172,8 +172,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &7123335273105198543
-BoxCollider2D:
+--- !u!114 &3588311113383864327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6567285648113064229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5656d9063cf1e8b4ba0f757ff6339d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBounceForce: 15
+  redParticlePrefab: {fileID: 1311555431081677532, guid: 31292f10939fd0446b54a94e4f11b42e, type: 3}
+  heartPrefab: {fileID: 8120951746793606408, guid: b4e1561a8731e864f9688d360b028b26, type: 3}
+  enragedDuration: 8
+  passiveDuration: 2
+  followSpeed: 2
+  detectionRange: 20
+  shootInterval: 1
+  particleCount: 12
+  particleSpeed: 5
+--- !u!60 &2672180174146612446
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -202,11 +224,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.003060639, y: -0.009182066}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -216,29 +238,14 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.3975724, y: 0.28290206}
-  m_EdgeRadius: 0
---- !u!114 &3588311113383864327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6567285648113064229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5656d9063cf1e8b4ba0f757ff6339d9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enragedDuration: 8
-  passiveDuration: 3
-  redParticlePrefab: {fileID: 1311555431081677532, guid: 31292f10939fd0446b54a94e4f11b42e, type: 3}
-  followSpeed: 2
-  detectionRange: 10
-  shootInterval: 1
-  particleCount: 12
-  particleSpeed: 5
-  maxLife: 3
-  heartPrefab: {fileID: 8120951746793606408, guid: b4e1561a8731e864f9688d360b028b26, type: 3}
-  heartsParent: {fileID: 5372555492014193479}
-  player: {fileID: 0}
+  m_Points:
+    m_Paths:
+    - - {x: -0.19158743, y: -0.041587453}
+      - {x: -0.07706392, y: -0.14043663}
+      - {x: 0.06964297, y: -0.1415874}
+      - {x: 0.19503988, y: -0.05095295}
+      - {x: 0.19158755, y: 0.03131}
+      - {x: 0.063095376, y: 0.12388903}
+      - {x: -0.07051628, y: 0.12734139}
+      - {x: -0.19273823, y: 0.020873342}
+  m_UseDelaunayMesh: 0

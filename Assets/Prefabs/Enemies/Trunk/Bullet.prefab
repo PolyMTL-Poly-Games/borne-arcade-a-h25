@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2547238556143141990}
   m_Layer: 6
   m_Name: Bullet
-  m_TagString: Enemy projectile
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,4 +177,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPiecePrefab: {fileID: 6835777259343517808, guid: 722bcc208b89ea84993df89822f88a69, type: 3}
   pieceCount: 5
-  explosionRadius: 20
+  explosionForce: 50

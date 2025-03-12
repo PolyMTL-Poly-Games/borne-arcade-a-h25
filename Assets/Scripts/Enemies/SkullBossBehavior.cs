@@ -1,35 +1,35 @@
 using UnityEngine;
 using System.Collections;
 
-public class SkullBossBehavior : MonoBehaviour
+public class SkullBossBehavior : EnemyController
 {
+    [SerializeField] private GameObject redParticlePrefab; // Prefab for red particle projectile
+    [SerializeField] private GameObject heartPrefab;
     [SerializeField] private float enragedDuration = 8f; // Time skull stays enraged
     [SerializeField] private float passiveDuration = 5f; // Time skull stays passive
-    [SerializeField] private GameObject redParticlePrefab; // Prefab for red particle projectile
     [SerializeField] private float followSpeed = 2f;
     [SerializeField] private float detectionRange = 8f;
     [SerializeField] private float shootInterval = 1f; // Time between particle bursts
     [SerializeField] private int particleCount = 12; // Number of particles in 360-degree burst
     [SerializeField] private float particleSpeed = 5f; // Speed of each particle
-    [SerializeField]
+
+    private Transform heartContainer;
     private int maxLife = 3;
     private GameObject[] hearts;
-    private bool enragedState;
-    [SerializeField] private GameObject heartPrefab; // Prefab for heart indicator
-    [SerializeField] private Transform heartsParent; // Parent transform for hearts
-    public Transform player;
-    private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
-    private Animator animator;
+    private bool isEnraged;
+    private Coroutine cycleCoroutine;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        heartContainer = transform.GetChild(0);
+        hitBounceForce = 25f;
+    }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
-        StartCoroutine(CycleState());
+        cycleCoroutine = StartCoroutine(CycleState());
         InitializeHearts();
-
     }
 
     private void Update()
@@ -64,21 +64,31 @@ public class SkullBossBehavior : MonoBehaviour
         while (true)
         {
             // Enraged
-            enragedState = true;
-            animator.SetTrigger("Enraged");
+            isEnraged = true;
+            animator.SetBool("isEnraged", isEnraged);
             StartCoroutine(ShootParticles());
             yield return new WaitForSeconds(enragedDuration);
 
             // Passive
-            enragedState = false;
-            animator.SetTrigger("Passive");
+            isEnraged = false;
+            animator.SetBool("isEnraged", isEnraged);
             yield return new WaitForSeconds(passiveDuration);
         }
     }
 
+    private void restartCycle()
+    {
+        if (cycleCoroutine != null)
+        {
+            StopCoroutine(cycleCoroutine);
+        }
+
+        cycleCoroutine = StartCoroutine(CycleState());
+    }
+
     private IEnumerator ShootParticles()
     {
-        while (enragedState)
+        while (isEnraged)
         {
             // Shoot particles in 360-degree spread
             float angleStep = 360f / particleCount;
@@ -100,57 +110,42 @@ public class SkullBossBehavior : MonoBehaviour
                 }
 
                 angle += angleStep;
-                Destroy(particle, 4f);
+                Destroy(particle, 10f);
             }
 
             yield return new WaitForSeconds(shootInterval);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnCollisionEnter2D(Collision2D other)
     {
-        if (collision.gameObject.CompareTag("Player") && !enragedState)
+        if (other.gameObject.CompareTag("Player"))
         {
-            // Damage the skull when the player jumps on it
-            if (collision.transform.position.y > transform.position.y + 0.5f)
+            if (!isEnraged && IsPlayerLanding(other))
             {
-                Debug.Log("Player hit skull!");
-                TakeDamage();
-                collision.gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(50f, 30f); // Bounce player up
+                OnDamage();
+                BouncePlayer(other);
             }
-
             else
             {
-                // Damage the player
-                Debug.Log("Player hit by skull!");
+                other.gameObject.GetComponent<PlayerController>().Hurt(gameObject);
             }
         }
-        else if (collision.gameObject.CompareTag("RedParticle"))
-        {
-            Debug.Log("Player hit fire ball");
-        }
     }
 
-    private void Die()
+    protected override void OnDamage()
     {
-        animator.SetTrigger("Hit");
-        // Disable skull after hit animation
-        Destroy(gameObject, 0.5f); // Delay to let the animation play
+        base.OnDamage();
+        maxLife--;
+        UpdateHearts();
     }
 
-    private void TakeDamage()
+    protected override void OnHitAnimationEnd()
     {
-        if (maxLife > 0)
-        {
-            animator.SetTrigger("Hit");
-            maxLife--;
-            UpdateHearts();
-        }
-
         if (maxLife <= 0)
-        {
-            Die();
-        }
+            base.OnHitAnimationEnd();
+        else
+            restartCycle();
     }
 
     private void InitializeHearts()
@@ -160,7 +155,7 @@ public class SkullBossBehavior : MonoBehaviour
 
         for (int i = 0; i < maxLife; i++)
         {
-            GameObject heart = Instantiate(heartPrefab, heartsParent);
+            GameObject heart = Instantiate(heartPrefab, heartContainer);
             heart.transform.localPosition = new Vector3(xPositions[i], 0, 0);
             hearts[i] = heart;
         }
@@ -170,8 +165,7 @@ public class SkullBossBehavior : MonoBehaviour
     {
         if (maxLife >= 0 && maxLife < hearts.Length)
         {
-            hearts[maxLife].GetComponent<Animator>().SetTrigger("Lose");
+            hearts[maxLife].GetComponent<Animator>().SetTrigger("lose");
         }
     }
-
 }
