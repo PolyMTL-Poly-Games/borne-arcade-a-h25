@@ -26,13 +26,16 @@ public class EnemyController : MonoBehaviour
 
     protected virtual void OnDamage()
     {
-        animator.SetTrigger("isHit");
+        animator.SetTrigger("hit");
     }
 
     // Voir fin d'animation Hit
     protected void OnHitAnimationEnd()
     {
-        Destroy(transform.gameObject);
+        if (transform.parent.gameObject != null)
+            Destroy(transform.parent.gameObject);
+        else
+            Destroy(transform.gameObject);
     }
 
     protected void BouncePlayer(Collision2D other)
