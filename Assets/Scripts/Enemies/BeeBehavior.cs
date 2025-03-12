@@ -9,7 +9,6 @@ public class BeeBehavior : EnemyController
     [SerializeField] private float stingSpeed = 7.5f;
     [SerializeField] private float detectionRange = 8f;
 
-    private Transform player;
     private Transform stingSpawnPoint;
     private Transform leftEdge;
     private Transform rightEdge;
@@ -20,7 +19,6 @@ public class BeeBehavior : EnemyController
     protected override void Awake()
     {
         base.Awake();
-        player = GameObject.FindWithTag("Player").transform;
         stingSpawnPoint = transform.GetChild(0);
         leftEdge = transform.parent.GetChild(1);
         rightEdge = transform.parent.GetChild(2);

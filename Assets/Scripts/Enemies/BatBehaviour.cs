@@ -4,17 +4,6 @@ public class BatBehavior : EnemyController
 {
     [SerializeField] private float followSpeed = 2f;
     [SerializeField] private float detectionRange = 8f;
-    private Transform player;
-    private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        player = GameObject.FindWithTag("Player").transform;
-        rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
 
     void Update()
     {

@@ -4,11 +4,18 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float hitBounceForce = 15f;
+
+    protected Transform player;
+    protected Rigidbody2D rb;
     protected Animator animator;
+    protected SpriteRenderer spriteRenderer;
 
     protected virtual void Awake()
     {
+        player = GameObject.FindWithTag("Player").transform;
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // virtual, so the child class can override this method if needed

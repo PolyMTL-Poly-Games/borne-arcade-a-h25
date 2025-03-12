@@ -2,25 +2,14 @@ using UnityEngine;
 
 public class SlimeBehavior : EnemyController
 {
-    [SerializeField] private float followSpeed = 5f;
+    [SerializeField] private float followSpeed = 7f;
     [SerializeField] private float detectionRange = 15f;
     [SerializeField] private float jumpForce = 10f;
 
-    private Transform player;
-    private Rigidbody2D rb;
     public float waitTime = 1f;
-    private SpriteRenderer spriteRenderer;
     private bool isGrounded = true;
     private float jumpCooldown = 1f;
     private float lastJumpTime;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        player = GameObject.FindWithTag("Player").transform;
-        rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
 
     void Update()
     {
