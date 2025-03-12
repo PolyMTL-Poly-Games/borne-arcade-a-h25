@@ -1,26 +1,29 @@
 using UnityEngine;
 using System.Collections;
 
-public class BeeBehavior : MonoBehaviour
+public class BeeBehavior : EnemyController
 {
-    [SerializeField] private float moveSpeed = 2f; // Movement speed
-    [SerializeField] private Transform leftEdge; // Left patrol edge
-    [SerializeField] private Transform rightEdge; // Right patrol edge
-    [SerializeField] private float detectionRange = 8f;
-    private bool canAttack = true;
-    private float lastAttackTime = 0f;
+    [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private GameObject stingPrefab;
-    private Transform stingSpawnPoint;
     [SerializeField] private float attackCooldown = 1.5f;
     [SerializeField] private float stingSpeed = 7.5f;
-    public Transform player;
-    private Animator animator;
-    private float direction = 1f; // Moving direction (1 for right, -1 for left)
+    [SerializeField] private float detectionRange = 8f;
 
-    private void Start()
+    private Transform player;
+    private Transform stingSpawnPoint;
+    private Transform leftEdge;
+    private Transform rightEdge;
+    private bool canAttack = true;
+    private float lastAttackTime = 0f;
+    private float direction = 1f;
+
+    protected override void Awake()
     {
-        animator = GetComponent<Animator>();
+        base.Awake();
+        player = GameObject.FindWithTag("Player").transform;
         stingSpawnPoint = transform.GetChild(0);
+        leftEdge = transform.parent.GetChild(1);
+        rightEdge = transform.parent.GetChild(2);
     }
 
     private void Update()
@@ -33,7 +36,7 @@ public class BeeBehavior : MonoBehaviour
         {
             if (canAttack)
             {
-                animator.SetTrigger("Attack");
+                animator.SetTrigger("attack");
                 StartCoroutine(WaitAndShoot());
                 canAttack = false;
                 lastAttackTime = Time.time;
@@ -78,28 +81,10 @@ public class BeeBehavior : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnDrawGizmos()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            // Check if the player is jumping on top of the bee
-            if (collision.transform.position.y > transform.position.y + 0.5f)
-            {
-                Die();
-                collision.gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, 10f); // Bounce player up
-            }
-            else
-            {
-                // Damage the player
-                Debug.Log("Player hit by bee!");
-            }
-        }
-    }
-
-    private void Die()
-    {
-        animator.SetTrigger("Hit");
-        // Disable bee after hit animation
-        Destroy(gameObject, 0.5f); // Delay to let the animation play
+        // Draw a sphere to visualize detection radius
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 }

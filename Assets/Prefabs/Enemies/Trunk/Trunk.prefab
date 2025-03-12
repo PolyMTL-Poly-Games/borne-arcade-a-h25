@@ -204,6 +204,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8812921550338947463, guid: 40ce1d7f6c2d9904b8d31477a930d32a, type: 3}
   attackCooldown: 1.5
   bulletSpeed: 7.5
+  isShootingOnSight: 1
 --- !u!1 &1933055834924055035
 GameObject:
   m_ObjectHideFlags: 0

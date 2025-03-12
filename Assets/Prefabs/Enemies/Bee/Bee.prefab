@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8782380836918111032}
   - component: {fileID: 1863996614322213960}
   - component: {fileID: 639665119642848326}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bee
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,7 +122,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957786984431795358}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -190,14 +190,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810b325d5ad48c6488229081870a86a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounceForce: 15
   moveSpeed: 2
-  leftEdge: {fileID: 3186604101104619661}
-  rightEdge: {fileID: 5341922843447258380}
-  detectionRange: 8
   stingPrefab: {fileID: 1248172101971600092, guid: 74e7346a4ef42064383954e31413e58c, type: 3}
   attackCooldown: 1.5
   stingSpeed: 10
-  player: {fileID: 0}
+  detectionRange: 8
 --- !u!1 &2653858943921770361
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5341922843447258380}
   m_Layer: 6
-  m_Name: PatrolEdgeRight (1)
+  m_Name: PatrolEdgeRight
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -238,7 +236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7716030249777154315}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bee
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -259,8 +257,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6670042009554542550}
-  - {fileID: 5341922843447258380}
   - {fileID: 3186604101104619661}
+  - {fileID: 5341922843447258380}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8055635550213784319
@@ -272,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4470948953416064217}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: stingSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3186604101104619661}
   m_Layer: 6
-  m_Name: PatrolEdgeLeft (1)
+  m_Name: PatrolEdgeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
