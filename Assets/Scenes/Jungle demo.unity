@@ -182,7 +182,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -269,7 +269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84a94077ca94922479ae1ca0563681ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 994661087}
   smoothSpeed: 0.125
 --- !u!1 &5137719
 GameObject:
@@ -711,9 +710,9 @@ GameObject:
   - component: {fileID: 737552716}
   - component: {fileID: 737552715}
   - component: {fileID: 737552718}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Start (Moving) (64x64)_0
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1276,7 +1275,7 @@ GameObject:
   - component: {fileID: 932823158}
   m_Layer: 8
   m_Name: Tilemap
-  m_TagString: Respawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

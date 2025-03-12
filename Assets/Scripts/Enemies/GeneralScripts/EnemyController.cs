@@ -28,6 +28,10 @@ public class EnemyController : MonoBehaviour
                 OnDamage();
                 BouncePlayer(other);
             }
+            else
+            {
+                other.gameObject.GetComponent<PlayerController>().Hurt(gameObject);
+            }
         }
     }
 

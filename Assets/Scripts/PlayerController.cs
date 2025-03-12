@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 18f;
     [SerializeField] private float wallPushForce = 10f;
     [SerializeField] private int maxJumpCount = 2;
-    [SerializeField] private float wallJumpLockTime = 0.2f;
+    [SerializeField] private float controlLockTime = 0.2f;
     [SerializeField] private float enemyKnockbackForce = 30f;
     [SerializeField] private float enemyKnockbackUpwardForce = 20f;
 
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(wallPushForce, jumpForce);
 
         // Lock movement for a short duration to prevent player from sticking on wall when maintaining input
-        Invoke("AllowControl", wallJumpLockTime);
+        Invoke("AllowControl", controlLockTime);
         jumpCount = 0;
     }
 
@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = knockback;
 
         hasControl = false;
-        Invoke("AllowControl", wallJumpLockTime);
+        Invoke("AllowControl", controlLockTime);
 
         anim.SetTrigger("hit");
     }
