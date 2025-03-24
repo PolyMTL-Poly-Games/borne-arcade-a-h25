@@ -1,5 +1,7 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,6 +32,11 @@ public class PlayerController : MonoBehaviour
     private bool hasControl = true;
     private int jumpCount = 0;
 
+    private int health = 5;
+    private int maxHealth = 5;
+    private bool died = false;
+    private float respawnTime = 2f;
+
     void Awake()
     {
         wallCheck = transform.Find("WallCheck");
@@ -43,6 +50,7 @@ public class PlayerController : MonoBehaviour
         float moveInput = Input.GetAxis("Horizontal");
         bool hasPressedJump = Input.GetButtonDown("Jump");
 
+        CheckHP();
         Move(moveInput, hasPressedJump);
         UpdateAnimations(moveInput);
     }
@@ -51,6 +59,31 @@ public class PlayerController : MonoBehaviour
     {
         isTouchingWall = false;
         CheckTerrain();
+    }
+
+    private void OnGUI()
+    {
+        if (died)
+        {
+            // Not working yet
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 50, 50), "You died");
+        }
+    }
+
+    private void CheckHP()
+    {
+        if (health <= 0)
+        {
+            Debug.Log("dead");
+            // Position is harcoded just to see if it works for now, we can find the spawn point object for its position afterwards
+            rb.position = new Vector3((float)-5.9, (float)-1.81, 0);
+            rb.linearVelocity = new Vector2(0f, 0f);
+            health = maxHealth;
+            hasControl = false;
+            died = true;
+            Invoke("AllowControl", respawnTime);
+        }
+        died = false;
     }
 
     private void Move(float moveInput, bool hasPressedJump)
@@ -192,5 +225,6 @@ public class PlayerController : MonoBehaviour
         Invoke("AllowControl", controlLockTime);
 
         anim.SetTrigger("hit");
+        health--;
     }
 }
