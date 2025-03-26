@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -94,8 +95,7 @@ public class PlayerController : MonoBehaviour
     {
         if (health <= 0)
         {
-            Debug.Log("dead");
-            // Position is harcoded just to see if it works for now, we can find the spawn point object for its position afterwards
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             rb.position = new Vector3((float)-5.9, (float)-1.81, 0);
             rb.linearVelocity = new Vector2(0f, 0f);
             health = maxHealth;
