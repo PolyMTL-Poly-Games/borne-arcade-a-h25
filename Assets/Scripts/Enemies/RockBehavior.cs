@@ -54,6 +54,7 @@ public class RockBehavior : MonoBehaviour
             {
                 // Damage the player
                 Debug.Log("Player hit by bee!");
+                collision.gameObject.GetComponent<PlayerController>().Hurt(gameObject);
             }
         }
     }
