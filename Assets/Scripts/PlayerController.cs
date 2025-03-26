@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
@@ -37,22 +38,41 @@ public class PlayerController : MonoBehaviour
     private bool died = false;
     private float respawnTime = 2f;
 
+    // Input system variables
+    private PlayerInputActions inputActions;
+    private Vector2 moveInput;
+    private bool jumpPressed;
+
     void Awake()
     {
         wallCheck = transform.Find("WallCheck");
         groundCheck = transform.Find("GroundCheck");
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        // Initialize Input Actions
+        inputActions = new PlayerInputActions();
+        inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+        inputActions.Player.Jump.performed += ctx => jumpPressed = true;
+        inputActions.Player.Jump.canceled += ctx => jumpPressed = false;
+    }
+
+    private void OnEnable()
+    {
+        inputActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Disable();
     }
 
     void Update()
     {
-        float moveInput = Input.GetAxis("Horizontal");
-        bool hasPressedJump = Input.GetButtonDown("Jump");
-
         CheckHP();
-        Move(moveInput, hasPressedJump);
-        UpdateAnimations(moveInput);
+        Move();
+        UpdateAnimations();
     }
 
     void FixedUpdate()
@@ -86,20 +106,20 @@ public class PlayerController : MonoBehaviour
         died = false;
     }
 
-    private void Move(float moveInput, bool hasPressedJump)
+    private void Move()
     {
         if (hasControl)
         {
-            rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
-            HandleFacing(moveInput);
+            rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+            HandleFacing(moveInput.x);
         }
 
         // If the player can jump...
-        if (isGrounded && hasPressedJump)
+        if (isGrounded && jumpPressed)
         {
             Jump();
         }
-        else if (!isGrounded && hasPressedJump)
+        else if (!isGrounded && jumpPressed)
         {
             if (isTouchingWall)
             {
@@ -111,6 +131,9 @@ public class PlayerController : MonoBehaviour
                 anim.SetTrigger("wallJump");
             }
         }
+
+        // Reset jumpPressed after processing to prevent multiple jumps with single press
+        jumpPressed = false;
     }
 
     private void Jump()
@@ -205,12 +228,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void UpdateAnimations(float moveInput)
+    private void UpdateAnimations()
     {
-        anim.SetFloat("hSpeed", Math.Abs(moveInput));
+        anim.SetFloat("hSpeed", Mathf.Abs(moveInput.x));
         anim.SetFloat("vSpeed", rb.linearVelocity.y);
         anim.SetBool("isGrounded", isGrounded);
-        anim.SetBool("isHoldingWall", !isGrounded && isTouchingWall && Math.Abs(moveInput) > 0);
+        anim.SetBool("isHoldingWall", !isGrounded && isTouchingWall && Mathf.Abs(moveInput.x) > 0);
     }
 
     // Used by enemies and projectiles
