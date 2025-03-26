@@ -43,7 +43,8 @@ public class EnemyController : MonoBehaviour
     // Voir fin d'animation Hit
     protected virtual void OnHitAnimationEnd()
     {
-        if (transform.parent != null)
+        Transform parentTransform = transform.parent;
+        if (parentTransform != null && parentTransform.tag == "Enemy")
             Destroy(transform.parent.gameObject);
         else
             Destroy(transform.gameObject);
