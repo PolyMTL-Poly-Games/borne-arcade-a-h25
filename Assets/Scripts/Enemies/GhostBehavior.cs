@@ -84,8 +84,6 @@ public class GhostBehavior : MonoBehaviour
             }
             else
             {
-                // Damage the player
-                Debug.Log("Player hit by ghost!");
                 collision.gameObject.GetComponent<PlayerController>().Hurt(gameObject);
             }
         }
