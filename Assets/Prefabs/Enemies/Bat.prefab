@@ -198,5 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dffa35226e7d2249b74e541063a7e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followSpeed: 2
-  detectionRange: 8
+  hitBounceForce: 15
+  followSpeed: 5
+  detectionRange: 5
