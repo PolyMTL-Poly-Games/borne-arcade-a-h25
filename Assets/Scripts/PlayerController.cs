@@ -30,10 +30,10 @@ public class PlayerController : MonoBehaviour
     private bool hasControl = true;
     private int jumpCount = 0;
 
+    public HealthBar healthBar;
     private int health = 5;
     private int maxHealth = 5;
-    private bool died = false;
-    private float respawnTime = 2f;
+    private float respawnTime = 2.5f;
 
     // Input system variables
     private PlayerInputActions inputActions;
@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        healthBar.SetHealth(maxHealth);
+
         wallCheck = transform.Find("WallCheck");
         groundCheck = transform.Find("GroundCheck");
         anim = GetComponent<Animator>();
@@ -78,15 +80,6 @@ public class PlayerController : MonoBehaviour
         CheckTerrain();
     }
 
-    private void OnGUI()
-    {
-        if (died)
-        {
-            // Not working yet
-            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 50, 50), "You died");
-        }
-    }
-
     private void CheckHP()
     {
         if (health <= 0)
@@ -95,11 +88,10 @@ public class PlayerController : MonoBehaviour
             rb.position = new Vector3((float)-5.9, (float)-1.81, 0);
             rb.linearVelocity = new Vector2(0f, 0f);
             health = maxHealth;
+            healthBar.SetHealth(maxHealth);
             hasControl = false;
-            died = true;
             Invoke("AllowControl", respawnTime);
         }
-        died = false;
     }
 
     private void Move()
@@ -236,7 +228,7 @@ public class PlayerController : MonoBehaviour
     public void Hurt(GameObject danger)
     {
         Vector2 knockbackDirection = (transform.position.x > danger.transform.position.x) ? Vector2.right : Vector2.left;
-        Vector2 knockback = new Vector2(knockbackDirection.x * enemyKnockbackForce, enemyKnockbackUpwardForce);
+        Vector2 knockback = new Vector2(knockbackDirection.x * enemyKnockbackForce/2, enemyKnockbackUpwardForce/2);
 
         rb.linearVelocity = knockback;
 
@@ -245,5 +237,6 @@ public class PlayerController : MonoBehaviour
 
         anim.SetTrigger("hit");
         health--;
+        healthBar.SetHealth(health);
     }
 }

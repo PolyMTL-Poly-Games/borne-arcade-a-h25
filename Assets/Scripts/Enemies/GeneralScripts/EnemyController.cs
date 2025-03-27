@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     protected Rigidbody2D rb;
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
+    private bool collided = false;
 
     protected virtual void Awake()
     {
@@ -30,7 +31,11 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                other.gameObject.GetComponent<PlayerController>().Hurt(gameObject);
+                if (!collided)
+                {
+                    other.gameObject.GetComponent<PlayerController>().Hurt(gameObject);
+                }
+                collided = !collided;
             }
         }
     }
