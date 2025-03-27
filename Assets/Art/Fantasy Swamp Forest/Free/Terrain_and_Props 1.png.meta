@@ -342,9 +342,9 @@ TextureImporter:
       name: Terrain_and_Props_8
       rect:
         serializedVersion: 2
-        x: 303
+        x: 308
         y: 335
-        width: 17
+        width: 8
         height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
