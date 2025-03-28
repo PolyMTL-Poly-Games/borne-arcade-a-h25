@@ -1253,8 +1253,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.5, y: 18}
-  m_SizeDelta: {x: 42.04297, y: 9.223999}
+  m_AnchoredPosition: {x: 1.097, y: 16.457}
+  m_SizeDelta: {x: 39.237, y: 6.137}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &311116671
 MonoBehaviour:
@@ -2122,8 +2122,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.086}
-  m_SizeDelta: {x: 10.586, y: 10.171}
+  m_AnchoredPosition: {x: -0.281, y: -0.00000047684}
+  m_SizeDelta: {x: 8.341, y: 8.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &645375131
 MonoBehaviour:
@@ -22280,6 +22280,7 @@ GameObject:
   - component: {fileID: 1136731594}
   - component: {fileID: 1136731593}
   - component: {fileID: 1136731592}
+  - component: {fileID: 1136731595}
   m_Layer: 0
   m_Name: water (1)
   m_TagString: Untagged
@@ -22403,6 +22404,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1136731595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136731591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf9cce1d95be7146aeaa6cfe8b82be4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1147974480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24248,6 +24261,7 @@ GameObject:
   - component: {fileID: 1670247877}
   - component: {fileID: 1670247876}
   - component: {fileID: 1670247875}
+  - component: {fileID: 1670247878}
   m_Layer: 0
   m_Name: water
   m_TagString: Untagged
@@ -24371,6 +24385,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1670247878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670247874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf9cce1d95be7146aeaa6cfe8b82be4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1676534024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1420261306304412703, guid: 61c1cdb9f6b40984e8a36f554f1c5c8a, type: 3}

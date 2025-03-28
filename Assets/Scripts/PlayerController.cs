@@ -239,4 +239,9 @@ public class PlayerController : MonoBehaviour
         health--;
         healthBar.SetHealth(health);
     }
+
+    public void KillPlayer()
+    {
+        health = 0;
+    }
 }

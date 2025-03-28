@@ -6,11 +6,15 @@ public class TrunkBulletController : ProjectileController
     [SerializeField] private int pieceCount = 5;
     [SerializeField] private float explosionForce = 50f;
 
+
     // Note: les ennemis et les bullets s'ignorent grâce au Layer Collision Matrix. Voir Edit > Project Settings > Physics 2D
     protected override void OnCollisionEnter2D(Collision2D other)
     {
         base.OnCollisionEnter2D(other);
-        BreakBullet();
+        if (!hasHitPlayer)
+        {
+            BreakBullet();
+        }
         Destroy(gameObject);
     }
 
