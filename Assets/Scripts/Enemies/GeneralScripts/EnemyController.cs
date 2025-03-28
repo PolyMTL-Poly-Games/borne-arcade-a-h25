@@ -5,6 +5,7 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] protected float hitBounceForce = 15f;
 
+    protected PlayerController playerJumpNumber;
     protected Transform player;
     protected Rigidbody2D rb;
     protected Animator animator;
@@ -17,6 +18,7 @@ public class EnemyController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerJumpNumber = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
     // virtual, so the child class can override this method if needed
@@ -28,6 +30,10 @@ public class EnemyController : MonoBehaviour
             {
                 OnDamage();
                 BouncePlayer(other);
+                if (playerJumpNumber.jumpCount > 0)
+                {
+                    playerJumpNumber.jumpCount--;
+                }
             }
             else
             {

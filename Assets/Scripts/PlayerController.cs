@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private bool isFacingRight = true;
 
     private bool hasControl = true;
-    private int jumpCount = 0;
+    public int jumpCount = 0;
 
     public HealthBar healthBar;
     private int health = 5;

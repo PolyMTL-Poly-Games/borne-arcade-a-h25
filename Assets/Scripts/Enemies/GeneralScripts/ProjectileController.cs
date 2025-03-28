@@ -10,6 +10,7 @@ public class ProjectileController : MonoBehaviour
             if (!collidedWithPlayerAlready)
             {
                 other.gameObject.GetComponent<PlayerController>().Hurt(gameObject);
+                Destroy(gameObject);
             }
             collidedWithPlayerAlready = !collidedWithPlayerAlready;
         }
