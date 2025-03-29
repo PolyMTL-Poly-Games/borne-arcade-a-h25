@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class MusicManagerController : MonoBehaviour
+public class AudioManagerController : MonoBehaviour
 {
-    private static MusicManagerController instance;
+    private static AudioManagerController instance;
     private AudioResource startTrack;
 
     void Awake()
@@ -34,5 +34,10 @@ public class MusicManagerController : MonoBehaviour
     public void ResetTrack()
     {
         ChangeTrack(startTrack);
+    }
+
+    public void playSound(AudioClip sound)
+    {
+        GetComponent<AudioSource>().PlayOneShot(sound);
     }
 }

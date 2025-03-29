@@ -204,6 +204,8 @@ MonoBehaviour:
   enemyKnockbackUpwardForce: 20
   jumpCount: 0
   healthBar: {fileID: 0}
+  hurtSound: {fileID: 8300000, guid: 099b2723a985145499baf7355d6a2148, type: 3}
+  deathSound: {fileID: 8300000, guid: 976d3b7158050e54ba4b0d86c936b797, type: 3}
 --- !u!50 &6096109837352319966
 Rigidbody2D:
   serializedVersion: 5

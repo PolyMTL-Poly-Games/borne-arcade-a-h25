@@ -41,7 +41,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private bool jumpPressed;
 
-    private MusicManagerController musicManagerController;
+    private AudioManagerController audioManagerController;
+    public AudioClip hurtSound;
+    public AudioClip deathSound;
 
     void Awake()
     {
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour
         groundCheck = transform.Find("GroundCheck");
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        musicManagerController = FindFirstObjectByType<MusicManagerController>();
+        audioManagerController = FindFirstObjectByType<AudioManagerController>();
 
         // Initialize Input Actions
         inputActions = new PlayerInputActions();
@@ -88,15 +90,9 @@ public class PlayerController : MonoBehaviour
     {
         if (health <= 0)
         {
+            audioManagerController.playSound(deathSound);
+            audioManagerController.ResetTrack();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            musicManagerController.ResetTrack();
-
-            rb.position = new Vector3((float)-5.9, (float)-1.81, 0);
-            rb.linearVelocity = new Vector2(0f, 0f);
-            health = maxHealth;
-            healthBar.SetHealth(maxHealth);
-            hasControl = false;
-            Invoke("AllowControl", respawnTime);
         }
     }
 
@@ -241,9 +237,14 @@ public class PlayerController : MonoBehaviour
         hasControl = false;
         Invoke("AllowControl", controlLockTime);
 
+
         anim.SetTrigger("hit");
         health--;
         healthBar.SetHealth(health);
+
+        if (health != 0)
+            audioManagerController.playSound(hurtSound);
+
     }
 
     public void KillPlayer()

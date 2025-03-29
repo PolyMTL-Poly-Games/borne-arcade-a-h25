@@ -9,10 +9,10 @@ public class MusicTriggerController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            MusicManagerController musicManagerController = transform.parent.gameObject.GetComponent<MusicManagerController>();
-            if (musicManagerController != null)
+            AudioManagerController audioManagerController = transform.parent.gameObject.GetComponent<AudioManagerController>();
+            if (audioManagerController != null)
             {
-                musicManagerController.ChangeTrack(newTrack);
+                audioManagerController.ChangeTrack(newTrack);
             }
         }
     }
