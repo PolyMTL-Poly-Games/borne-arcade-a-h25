@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
 
     [Header("Player Settings")]
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 8f;
     [SerializeField] private float jumpForce = 18f;
     [SerializeField] private float wallPushForce = 10f;
     [SerializeField] private int maxJumpCount = 2;
@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour
     public void Hurt(GameObject danger)
     {
         Vector2 knockbackDirection = (transform.position.x > danger.transform.position.x) ? Vector2.right : Vector2.left;
-        Vector2 knockback = new Vector2(knockbackDirection.x * enemyKnockbackForce/2, enemyKnockbackUpwardForce/2);
+        Vector2 knockback = new Vector2(knockbackDirection.x * enemyKnockbackForce / 2, enemyKnockbackUpwardForce / 2);
 
         rb.linearVelocity = knockback;
 
