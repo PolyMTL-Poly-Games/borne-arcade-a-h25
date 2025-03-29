@@ -76,7 +76,6 @@ GameObject:
   - component: {fileID: 374715076319851333}
   - component: {fileID: 6096109837352319966}
   - component: {fileID: 1169444901003672304}
-  - component: {fileID: 2815752192161196095}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -206,6 +205,8 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   hurtSound: {fileID: 8300000, guid: 099b2723a985145499baf7355d6a2148, type: 3}
   deathSound: {fileID: 8300000, guid: 976d3b7158050e54ba4b0d86c936b797, type: 3}
+  stompSound: {fileID: 8300000, guid: 9cebcf418ca7d8f4fad200c54573175b, type: 3}
+  jumpSound: {fileID: 8300000, guid: 8893c0e04fab7914cb8d664d4730c530, type: 3}
 --- !u!50 &6096109837352319966
 Rigidbody2D:
   serializedVersion: 5
@@ -234,43 +235,6 @@ Rigidbody2D:
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!70 &1169444901003672304
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6542054544871921595}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.016685259, y: -0.04796901}
-  m_Size: {x: 0.6496143, y: 0.90406203}
-  m_Direction: 0
---- !u!70 &2815752192161196095
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

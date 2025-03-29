@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
     private AudioManagerController audioManagerController;
     public AudioClip hurtSound;
     public AudioClip deathSound;
+    public AudioClip stompSound;
+    public AudioClip jumpSound;
 
     void Awake()
     {
@@ -130,6 +132,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         ++jumpCount;
+        audioManagerController.playSound(jumpSound);
     }
 
     private void WallJump()
@@ -139,6 +142,8 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(-wallPushForce, jumpForce);
         else
             rb.linearVelocity = new Vector2(wallPushForce, jumpForce);
+
+        audioManagerController.playSound(jumpSound);
 
         // Lock movement for a short duration to prevent player from sticking on wall when maintaining input
         Invoke("AllowControl", controlLockTime);
@@ -249,5 +254,10 @@ public class PlayerController : MonoBehaviour
     public void KillPlayer()
     {
         health = 0;
+    }
+
+    public void PlayStompSound()
+    {
+        audioManagerController.playSound(stompSound);
     }
 }

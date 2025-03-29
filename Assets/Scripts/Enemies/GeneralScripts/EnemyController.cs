@@ -65,6 +65,7 @@ public class EnemyController : MonoBehaviour
     {
         Rigidbody2D playerRb = other.gameObject.GetComponent<Rigidbody2D>();
         playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, hitBounceForce);
+        other.gameObject.GetComponent<PlayerController>().PlayStompSound();
     }
 
     protected bool IsPlayerLanding(Collision2D other)
