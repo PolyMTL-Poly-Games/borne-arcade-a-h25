@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
     public HealthBar healthBar;
     private int health = 5;
     private int maxHealth = 5;
-    private float respawnTime = 2.5f;
 
     // Input system variables
     private PlayerInputActions inputActions;

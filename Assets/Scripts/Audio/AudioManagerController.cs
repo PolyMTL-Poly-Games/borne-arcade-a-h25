@@ -25,7 +25,6 @@ public class AudioManagerController : MonoBehaviour
         AudioSource audioSource = GetComponent<AudioSource>();
         if (audioSource.resource != newTrack)
         {
-            audioSource.Stop();
             audioSource.resource = newTrack;
             audioSource.Play();
         }
