@@ -29,6 +29,7 @@ public class EnemyController : MonoBehaviour
             if (IsPlayerLanding(other))
             {
                 OnDamage();
+                GetComponent<Collider2D>().enabled = false;
                 BouncePlayer(other);
                 if (playerJumpNumber.jumpCount > 0)
                 {
