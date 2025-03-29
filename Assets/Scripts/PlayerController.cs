@@ -91,8 +91,8 @@ public class PlayerController : MonoBehaviour
     {
         if (health <= 0)
         {
-            audioManagerController.playSound(deathSound);
-            audioManagerController.ResetTrack();
+            audioManagerController?.playSound(deathSound);
+            audioManagerController?.ResetTrack();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         ++jumpCount;
-        audioManagerController.playSound(jumpSound);
+        audioManagerController?.playSound(jumpSound);
     }
 
     private void WallJump()
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
         else
             rb.linearVelocity = new Vector2(wallPushForce, jumpForce);
 
-        audioManagerController.playSound(jumpSound);
+        audioManagerController?.playSound(jumpSound);
 
         // Lock movement for a short duration to prevent player from sticking on wall when maintaining input
         Invoke("AllowControl", controlLockTime);
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour
         healthBar.SetHealth(health);
 
         if (health != 0)
-            audioManagerController.playSound(hurtSound);
+            audioManagerController?.playSound(hurtSound);
 
     }
 
@@ -258,6 +258,6 @@ public class PlayerController : MonoBehaviour
 
     public void PlayStompSound()
     {
-        audioManagerController.playSound(stompSound);
+        audioManagerController?.playSound(stompSound);
     }
 }
