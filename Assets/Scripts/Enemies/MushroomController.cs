@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class MushroomController : EnemyController
@@ -9,21 +8,16 @@ public class MushroomController : EnemyController
         Right
     }
 
+    [Header("Settings")]
     [SerializeField] private PatrolEdge startingTarget = PatrolEdge.Left;
     [SerializeField] private float patrolSpeed = 2f;
     [SerializeField] private float pauseTime = 1.5f;
-    [SerializeField] private float initialDelay = 1f; // Delay before starting patrol to allow explosion
-    [SerializeField] private float explosionXRange = 1f;
-    [SerializeField] private float explosionYRange = 1f;
-    [SerializeField] private float explosionForce = 10f;
-    [SerializeField] private bool isGettingBigger = false;
 
     private Transform patrolEdgeLeft;
     private Transform patrolEdgeRight;
     private Vector2 targetPosition;
-    private bool isMoving = false;
+    private bool isMoving = true;
     private float pauseTimer = 0f;
-    private bool hasStartedPatrol = false;
 
     protected override void Awake()
     {
@@ -37,18 +31,15 @@ public class MushroomController : EnemyController
         targetPosition = startingTarget == PatrolEdge.Left ? patrolEdgeLeft.position : patrolEdgeRight.position;
         defineFacing();
 
-        StartCoroutine(DelayPatrolStart());
+        setMovement(true);
     }
 
     private void Update()
     {
-        if (hasStartedPatrol)
-        {
-            if (isMoving)
-                Patrol();
-            else
-                Rest();
-        }
+        if (isMoving)
+            Patrol();
+        else
+            Rest();
     }
 
 
@@ -93,40 +84,5 @@ public class MushroomController : EnemyController
     {
         this.isMoving = isMoving;
         animator.SetBool("moving", isMoving);
-    }
-
-    protected override void OnDamage(bool isColliderStillEnabled = false)
-    {
-        base.OnDamage(true);
-    }
-
-    protected override void OnHitAnimationEnd()
-    {
-        Multiply();
-    }
-
-    private void Multiply()
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            GameObject miniMushroom = Instantiate(transform.parent.gameObject, transform.parent.position, Quaternion.identity);
-
-            float growthFactor = isGettingBigger ? 1.25f : 0.75f;
-            miniMushroom.transform.GetChild(0).transform.localScale *= growthFactor;
-
-            Rigidbody2D miniRb = miniMushroom.transform.GetChild(0).gameObject.GetComponent<Rigidbody2D>();
-
-            float randomX = Random.Range(-explosionXRange, explosionXRange);
-            float randomY = Random.Range(0, explosionYRange);
-            miniRb.AddForce(new Vector2(randomX, randomY) * explosionForce, ForceMode2D.Impulse);
-        }
-        Destroy(gameObject);
-    }
-
-    private IEnumerator DelayPatrolStart()
-    {
-        yield return new WaitForSeconds(initialDelay);
-        setMovement(true);
-        hasStartedPatrol = true;
     }
 }
