@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 569630172338971521}
   - component: {fileID: 6095034714578283719}
   - component: {fileID: 764910553434877729}
-  - component: {fileID: 418530176245384272}
+  - component: {fileID: 1502022721116805206}
   m_Layer: 0
   m_Name: Saw
   m_TagString: Untagged
@@ -148,39 +148,15 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.19
---- !u!58 &418530176245384272
-CircleCollider2D:
+--- !u!114 &1502022721116805206
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7764177473383155962}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.19
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d666ac38277604f9552cd12f0cd913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
