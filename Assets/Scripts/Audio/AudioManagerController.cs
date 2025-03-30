@@ -37,6 +37,7 @@ public class AudioManagerController : MonoBehaviour
 
     public void playSound(AudioClip sound)
     {
-        GetComponent<AudioSource>().PlayOneShot(sound);
+        float volume = 0.75f;
+        GetComponent<AudioSource>().PlayOneShot(sound, volume);
     }
 }
