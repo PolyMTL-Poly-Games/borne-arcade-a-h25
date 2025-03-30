@@ -13,7 +13,7 @@ public class SkullBossBehavior : EnemyController
     [SerializeField] private float shootInterval = 1f; // Time between particle bursts
     [SerializeField] private int particleCount = 12; // Number of particles in 360-degree burst
     [SerializeField] private float particleSpeed = 5f; // Speed of each particle
-
+    [SerializeField] private GameObject wall;
     private Transform heartContainer;
     private int maxLife = 3;
     private GameObject[] hearts;
@@ -147,6 +147,8 @@ public class SkullBossBehavior : EnemyController
         {
             base.OnHitAnimationEnd();
             SpawnConfetti();
+            wall.SetActive(false);
+
         }
         else
         {
