@@ -29,7 +29,6 @@ public class EnemyController : MonoBehaviour
             if (IsPlayerLanding(other))
             {
                 OnDamage();
-                GetComponent<Collider2D>().enabled = false;
                 BouncePlayer(other);
                 if (playerJumpNumber.jumpCount > 0)
                 {
@@ -47,9 +46,10 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    protected virtual void OnDamage()
+    protected virtual void OnDamage(bool isColliderStillEnabled = false)
     {
         animator.SetTrigger("hit");
+        GetComponent<Collider2D>().enabled = isColliderStillEnabled;
     }
 
     // Voir fin d'animation Hit
