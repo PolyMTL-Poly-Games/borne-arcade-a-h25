@@ -4,7 +4,7 @@ using UnityEngine;
 public class TrunkController : EnemyController
 {
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float attackCooldown = 1.5f;
+    [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private float bulletSpeed = 7.5f;
     [SerializeField] private bool isShootingOnSight = true;
 

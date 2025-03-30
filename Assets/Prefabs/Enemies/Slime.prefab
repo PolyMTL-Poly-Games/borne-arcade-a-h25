@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitBounceForce: 15
-  followSpeed: 5
+  followSpeed: 8
   detectionRange: 15
-  jumpForce: 10
+  jumpForce: 12
   waitTime: 1
