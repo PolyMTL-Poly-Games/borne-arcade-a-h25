@@ -44,7 +44,7 @@ public class MushroomController : EnemyController
     {
         if (hasStartedPatrol)
         {
-            if (isMoving && rb.linearVelocity.y != 0)
+            if (isMoving)
                 Patrol();
             else
                 Rest();
@@ -54,9 +54,7 @@ public class MushroomController : EnemyController
 
     private void Patrol()
     {
-        float direction = Mathf.Sign(targetPosition.x - transform.position.x);
-
-        rb.linearVelocity = new Vector2(direction * patrolSpeed, rb.linearVelocity.y);
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(targetPosition.x, transform.position.y), Time.deltaTime * patrolSpeed);
 
         float horizontalDistance = Mathf.Abs(transform.position.x - targetPosition.x);
         if (horizontalDistance < 0.1f)
