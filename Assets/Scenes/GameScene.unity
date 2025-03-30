@@ -51197,11 +51197,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7858369973303923830, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 248.6
+      value: 361.6
       objectReference: {fileID: 0}
     - target: {fileID: 7858369973303923830, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.1
+      value: -2.14
       objectReference: {fileID: 0}
     - target: {fileID: 7858369973303923830, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -54428,8 +54428,8 @@ Transform:
   m_GameObject: {fileID: 1232357034}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 249.56929, y: -0.4218359, z: 0}
-  m_LocalScale: {x: 0.4736424, y: 5.123984, z: 1.863267}
+  m_LocalPosition: {x: 250.58, y: -0.41, z: 0}
+  m_LocalScale: {x: 0.70271957, y: 5.631258, z: 2.0477304}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2099006883}
@@ -56481,6 +56481,98 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1354685560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1354685561}
+  - component: {fileID: 1354685563}
+  - component: {fileID: 1354685562}
+  m_Layer: 0
+  m_Name: MusicTrigger3
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1354685561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354685560}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 388.17, y: -30.08, z: 0}
+  m_LocalScale: {x: 0.82887423, y: 6.5074596, z: 1.863267}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2099006883}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1354685562
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354685560}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1354685563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354685560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3faf69831a0248f4193c0c885043acb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newTrack: {fileID: 8300000, guid: e69f519e616861c40a51a9e064255e3d, type: 3}
 --- !u!1 &1356230425
 GameObject:
   m_ObjectHideFlags: 0
@@ -68571,6 +68663,7 @@ Transform:
   m_Children:
   - {fileID: 760674439}
   - {fileID: 1232357035}
+  - {fileID: 1354685561}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2099006884
