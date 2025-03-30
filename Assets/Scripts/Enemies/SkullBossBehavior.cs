@@ -124,7 +124,7 @@ public class SkullBossBehavior : EnemyController
         {
             if (!isEnraged && IsPlayerLanding(other))
             {
-                OnDamage();
+                OnDamage(true);
                 BouncePlayer(other);
             }
             else
@@ -134,9 +134,9 @@ public class SkullBossBehavior : EnemyController
         }
     }
 
-    protected override void OnDamage()
+    protected override void OnDamage(bool isColliderStillEnabled = false)
     {
-        base.OnDamage();
+        base.OnDamage(true);
         maxLife--;
         UpdateHearts();
     }
