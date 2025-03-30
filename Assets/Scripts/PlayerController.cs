@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask whatIsTerrain = 1 << 8;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private GameObject healEffectPrefab;
 
     const float DETECTION_RADIUS = .2f;
     private bool isTouchingWall;
@@ -31,15 +32,19 @@ public class PlayerController : MonoBehaviour
     private bool hasControl = true;
     public int jumpCount = 0;
 
+    // Health
     public HealthBar healthBar;
     private int health = 5;
     private int maxHealth = 5;
+    private int essenceCount = 0;
+    private int essenceThreshold = 3;
 
     // Input system variables
     private PlayerInputActions inputActions;
     private Vector2 moveInput;
     private bool jumpPressed;
 
+    // Audio
     private AudioManagerController audioManagerController;
     public AudioClip hurtSound;
     public AudioClip deathSound;
@@ -259,5 +264,33 @@ public class PlayerController : MonoBehaviour
     public void PlayStompSound()
     {
         audioManagerController?.playSound(stompSound);
+    }
+
+    public void EssenceDrain()
+    {
+        essenceCount++;
+        if (essenceCount >= essenceThreshold)
+        {
+            Heal();
+            essenceCount = 0;
+        }
+    }
+
+    private void Heal()
+    {
+        if (health < maxHealth)
+        {
+            health++;
+            healthBar.SetHealth(health);
+        }
+
+        if (healEffectPrefab != null)
+        {
+            GameObject healEffect = Instantiate(healEffectPrefab, transform.position, Quaternion.identity);
+            healEffect.transform.SetParent(transform);
+
+            ParticleSystem particleSystem = healEffect.GetComponent<ParticleSystem>();
+            Destroy(healEffect, particleSystem.main.duration);
+        }
     }
 }

@@ -198,4 +198,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3c1dad769ebe441a706de989b71a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pieceDuration: 5
+  hasHitPlayer: 0
+  pieceDuration: 3

@@ -34,6 +34,7 @@ public class EnemyController : MonoBehaviour
                 {
                     playerJumpNumber.jumpCount--;
                 }
+                other.gameObject.GetComponent<PlayerController>().EssenceDrain();
             }
             else
             {
