@@ -12,6 +12,15 @@ public class GameOverTrigger : MonoBehaviour
         gameOverUI.SetActive(false);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            ReturnToMainMenu();
+        }
+
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

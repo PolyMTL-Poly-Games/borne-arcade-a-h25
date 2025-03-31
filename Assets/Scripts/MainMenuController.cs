@@ -3,6 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            PlayGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            QuitGame();
+        }
+    }
+
     public void PlayGame()
     {
         SceneManager.LoadScene("GameScene");
@@ -12,7 +25,6 @@ public class MainMenuController : MonoBehaviour
     {
         Application.Quit();
 
-        // If in the Unity Editor, stop playing the game
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
