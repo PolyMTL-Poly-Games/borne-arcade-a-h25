@@ -30,10 +30,6 @@ public class EnemyController : MonoBehaviour
             {
                 OnDamage();
                 BouncePlayer(other);
-                if (playerJumpNumber.jumpCount > 0)
-                {
-                    playerJumpNumber.jumpCount--;
-                }
                 other.gameObject.GetComponent<PlayerController>().EssenceDrain();
             }
             else
@@ -68,6 +64,10 @@ public class EnemyController : MonoBehaviour
         Rigidbody2D playerRb = other.gameObject.GetComponent<Rigidbody2D>();
         playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, hitBounceForce);
         other.gameObject.GetComponent<PlayerController>().PlayStompSound();
+        if (playerJumpNumber.jumpCount > 0)
+        {
+            playerJumpNumber.jumpCount--;
+        }
     }
 
     protected bool IsPlayerLanding(Collision2D other)
