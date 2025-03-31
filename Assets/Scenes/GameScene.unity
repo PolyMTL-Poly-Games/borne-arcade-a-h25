@@ -13335,6 +13335,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bat (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 9076358162779272115, guid: 61c1cdb9f6b40984e8a36f554f1c5c8a, type: 3}
+      propertyPath: detectionRange
+      value: 9.52
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -51735,6 +51739,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 374715076319851333, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
+      propertyPath: bossFightRespawnPoint
+      value: 
+      objectReference: {fileID: 1606565083}
     - target: {fileID: 4238581258078656387, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
       propertyPath: m_Camera
       value: 
@@ -51757,11 +51765,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7858369973303923830, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 355.84
+      value: -5.82
       objectReference: {fileID: 0}
     - target: {fileID: 7858369973303923830, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -32.61
+      value: -1.58
       objectReference: {fileID: 0}
     - target: {fileID: 7858369973303923830, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51805,17 +51813,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7858369973303923830, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
   m_PrefabInstance: {fileID: 994661086}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &994661088 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 374715076319851333, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
-  m_PrefabInstance: {fileID: 994661086}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7804c2e8187d6b4caf909317a3f8d4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &995012796
 GameObject:
   m_ObjectHideFlags: 0
@@ -61012,42 +61009,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1606565086}
   - component: {fileID: 1606565085}
-  - component: {fileID: 1606565084}
   - component: {fileID: 1606565087}
   m_Layer: 0
-  m_Name: BossTrigger
+  m_Name: BossFightRespawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!50 &1606565084
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606565083}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &1606565085
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -61078,11 +61047,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 1.5158386, y: 1.687027}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -61092,7 +61061,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4.0316772, y: 5.1226196}
   m_EdgeRadius: 0
 --- !u!4 &1606565086
 Transform:
@@ -61103,7 +61072,7 @@ Transform:
   m_GameObject: {fileID: 1606565083}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 387.1769, y: -30.734602, z: 0.03113247}
+  m_LocalPosition: {x: 380.3, y: -32.71, z: 0.03113247}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61121,7 +61090,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a680687ae82fc04caaa3ffe3ab945aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 994661088}
 --- !u!1 &1607891583
 GameObject:
   m_ObjectHideFlags: 0
@@ -61766,6 +61734,10 @@ PrefabInstance:
     - target: {fileID: 2913597697222014842, guid: 61c1cdb9f6b40984e8a36f554f1c5c8a, type: 3}
       propertyPath: m_Name
       value: Bat (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076358162779272115, guid: 61c1cdb9f6b40984e8a36f554f1c5c8a, type: 3}
+      propertyPath: detectionRange
+      value: 8.29
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -70366,6 +70338,14 @@ PrefabInstance:
     - target: {fileID: 959098355234746603, guid: b87349d79da1dba4d98e7969a4fc2d17, type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966813617414683234, guid: b87349d79da1dba4d98e7969a4fc2d17, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966813617414683234, guid: b87349d79da1dba4d98e7969a4fc2d17, type: 3}
+      propertyPath: m_audioClip
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5674037732488499681, guid: b87349d79da1dba4d98e7969a4fc2d17, type: 3}
       propertyPath: m_LocalPosition.x

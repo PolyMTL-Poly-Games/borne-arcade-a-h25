@@ -40,8 +40,8 @@ public class PlayerController : MonoBehaviour
     private int essenceThreshold = 3;
 
     // Respawn at boss
-    public bool isAtBoss = false;
-    public Vector3 bossRespawnPosition = new Vector3(366, -33, 0);
+    static public bool isAtBoss = false;
+    public GameObject bossFightRespawnPoint;
 
     // Input system variables
     private PlayerInputActions inputActions;
@@ -98,25 +98,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        transform.position = bossRespawnPosition;
+        if (isAtBoss && bossFightRespawnPoint != null)
+            transform.position = bossFightRespawnPoint.transform.position;
     }
 
     private void CheckHP()
     {
         if (health <= 0)
         {
-            if (!isAtBoss)
-            {
-                AudioManagerController.instance?.PlaySound(deathSound);
-                AudioManagerController.instance?.ResetTrack();
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-            else
-            {
-                AudioManagerController.instance?.PlaySound(deathSound);
-                AudioManagerController.instance?.ResetTrack();
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
+            AudioManagerController.instance?.PlaySound(deathSound);
+            AudioManagerController.instance?.ResetTrack();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -272,7 +264,6 @@ public class PlayerController : MonoBehaviour
 
         if (health != 0)
             AudioManagerController.instance?.PlaySound(hurtSound);
-
     }
 
     public void KillPlayer()

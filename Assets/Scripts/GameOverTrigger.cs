@@ -23,6 +23,7 @@ public class GameOverTrigger : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        PlayerController.isAtBoss = false;
         Time.timeScale = 1f;
         AudioManagerController.instance?.Destroy();
         SceneManager.LoadScene("MainMenuScene");
