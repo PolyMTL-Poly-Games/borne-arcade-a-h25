@@ -1,16 +1,17 @@
-using System.Data.Common;
 using UnityEngine;
+using System.Collections;
 
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] protected float hitBounceForce = 15f;
+    [SerializeField] protected float damageCooldown = 1.5f;
 
     protected PlayerController playerJumpNumber;
     protected Transform player;
     protected Rigidbody2D rb;
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
-    private bool collided = false;
+    protected bool canDamagePlayer = true;
 
     protected virtual void Awake()
     {
@@ -22,7 +23,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // virtual, so the child class can override this method if needed
-    protected virtual void OnCollisionEnter2D(Collision2D other)
+    protected virtual void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -32,13 +33,10 @@ public class EnemyController : MonoBehaviour
                 BouncePlayer(other);
                 other.gameObject.GetComponent<PlayerController>().EssenceDrain();
             }
-            else
+            else if (canDamagePlayer)
             {
-                if (!collided)
-                {
-                    other.gameObject.GetComponent<PlayerController>().Hurt(gameObject);
-                }
-                collided = !collided;
+                other.gameObject.GetComponent<PlayerController>().Hurt(gameObject);
+                StartCoroutine(PauseDamage());
             }
         }
     }
@@ -72,6 +70,13 @@ public class EnemyController : MonoBehaviour
 
     protected bool IsPlayerLanding(Collision2D other)
     {
-        return other.relativeVelocity.y < 0 && other.transform.position.y > transform.position.y;
+        return other.transform.position.y > transform.position.y;
+    }
+
+    protected IEnumerator PauseDamage()
+    {
+        canDamagePlayer = false;
+        yield return new WaitForSeconds(damageCooldown);
+        canDamagePlayer = true;
     }
 }

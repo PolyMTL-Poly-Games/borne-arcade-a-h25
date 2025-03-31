@@ -52,9 +52,9 @@ public class SlimeBehavior : EnemyController
         }
     }
 
-    protected override void OnCollisionEnter2D(Collision2D other)
+    protected override void OnCollisionStay2D(Collision2D other)
     {
-        base.OnCollisionEnter2D(other);
+        base.OnCollisionStay2D(other);
         if (other.gameObject.layer == LayerMask.NameToLayer("Terrain"))
         {
             // Reset grounded when touching the ground

@@ -6,23 +6,28 @@ public class GhostBehavior : EnemyController
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float disappearDuration = 3f;
     [SerializeField] private float appearDuration = 5f;
-    [SerializeField] private Transform leftEdge;
-    [SerializeField] private Transform rightEdge;
 
+    private Transform leftEdge;
+    private Transform rightEdge;
     private bool canMove = true;
     private Collider2D ghostCollider;
     private float direction = 1f;
 
-    private void Start()
+    protected override void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        base.Awake();
+        leftEdge = transform.parent.GetChild(1);
+        rightEdge = transform.parent.GetChild(2);
         ghostCollider = GetComponent<Collider2D>();
-        animator = GetComponent<Animator>();
+    }
 
+
+    void Start()
+    {
         StartCoroutine(CycleVisibility());
     }
 
-    private void Update()
+    void Update()
     {
         if (canMove)
         {

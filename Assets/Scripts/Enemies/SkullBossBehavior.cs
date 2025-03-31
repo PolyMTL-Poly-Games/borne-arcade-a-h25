@@ -120,7 +120,7 @@ public class SkullBossBehavior : EnemyController
         }
     }
 
-    protected override void OnCollisionEnter2D(Collision2D other)
+    protected override void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -129,9 +129,10 @@ public class SkullBossBehavior : EnemyController
                 OnDamage(true);
                 BouncePlayer(other);
             }
-            else
+            else if (canDamagePlayer)
             {
                 other.gameObject.GetComponent<PlayerController>().Hurt(gameObject);
+                StartCoroutine(PauseDamage());
             }
         }
     }

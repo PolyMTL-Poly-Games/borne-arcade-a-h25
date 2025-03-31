@@ -235,7 +235,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!114 &2272205157460353620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitBounceForce: 15
-  mushroomPrefab: {fileID: 8510261388156245708}
+  damageCooldown: 1
   startingTarget: 0
   patrolSpeed: 2
   pauseTime: 1.5
