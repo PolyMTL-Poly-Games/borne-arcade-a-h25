@@ -23,7 +23,7 @@ public class AudioManagerController : MonoBehaviour
 
     void Start()
     {
-        startTrack = transform.GetChild(0).GetComponent<AudioSource>().resource;
+        startTrack = transform.GetChild(0).GetComponent<MusicTriggerController>().newTrack;
     }
 
     public void ChangeTrack(AudioResource newTrack)
