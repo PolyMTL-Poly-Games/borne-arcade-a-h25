@@ -6,7 +6,7 @@ public class SkullBossBehavior : EnemyController
     [SerializeField] private GameObject redParticlePrefab; // Prefab for red particle projectile
     [SerializeField] private GameObject confettiPrefab;
     [SerializeField] private GameObject heartPrefab;
-    [SerializeField] private float enragedDuration = 8f; // Time skull stays enraged
+    [SerializeField] private float enragedDuration = 6f; // Time skull stays enraged
     [SerializeField] private float passiveDuration = 5f; // Time skull stays passive
     [SerializeField] private float followSpeed = 2f;
     [SerializeField] private float detectionRange = 20f;
@@ -122,6 +122,12 @@ public class SkullBossBehavior : EnemyController
 
     protected override void OnCollisionStay2D(Collision2D other)
     {
+        // Do nothing
+    }
+
+
+    protected void OnCollisionEnter2D(Collision2D other)
+    {
         if (other.gameObject.CompareTag("Player"))
         {
             if (!isEnraged && IsPlayerLanding(other))
@@ -132,7 +138,6 @@ public class SkullBossBehavior : EnemyController
             else if (canDamagePlayer)
             {
                 other.gameObject.GetComponent<PlayerController>().Hurt(gameObject);
-                StartCoroutine(PauseDamage());
             }
         }
     }
@@ -150,7 +155,7 @@ public class SkullBossBehavior : EnemyController
         {
             base.OnHitAnimationEnd();
             SpawnConfetti();
-            wall.SetActive(false);
+            wall?.SetActive(false);
             AudioManagerController.instance?.audioSource.Stop();
             AudioManagerController.instance?.PlaySound(defeatSound);
         }

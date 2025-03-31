@@ -185,10 +185,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitBounceForce: 15
+  damageCooldown: 1.5
   redParticlePrefab: {fileID: 1311555431081677532, guid: 31292f10939fd0446b54a94e4f11b42e, type: 3}
   confettiPrefab: {fileID: 6324268856477158343, guid: 81237d0fcc3a9c546b79c9885ca72690, type: 3}
   heartPrefab: {fileID: 8120951746793606408, guid: b4e1561a8731e864f9688d360b028b26, type: 3}
-  enragedDuration: 8
+  enragedDuration: 6
   passiveDuration: 5
   followSpeed: 2
   detectionRange: 20
