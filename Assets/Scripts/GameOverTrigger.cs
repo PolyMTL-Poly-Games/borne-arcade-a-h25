@@ -1,23 +1,36 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
-using UnityEngine.UI;
+using UnityEngine.InputSystem; // For PlayerInputActions
 
 public class GameOverTrigger : MonoBehaviour
 {
     public GameObject gameOverUI;
+
+    private PlayerInputActions inputActions;
+
+    private void Awake()
+    {
+        inputActions = new PlayerInputActions();
+    }
+
+    private void OnEnable()
+    {
+        inputActions.Enable();
+        inputActions.Player.Menu.performed += _ => ReturnToMainMenu();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Disable();
+    }
 
     private void Start()
     {
         gameOverUI.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            ReturnToMainMenu();
-        }
 
     }
 

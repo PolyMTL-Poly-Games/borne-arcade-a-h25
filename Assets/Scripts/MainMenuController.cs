@@ -1,19 +1,26 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem; // For PlayerInputActions
 
 public class MainMenuController : MonoBehaviour
 {
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            PlayGame();
-        }
+    private PlayerInputActions inputActions;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            QuitGame();
-        }
+    private void Awake()
+    {
+        inputActions = new PlayerInputActions();
+    }
+
+    private void OnEnable()
+    {
+        inputActions.Enable();
+        inputActions.Player.Start.performed += _ => PlayGame();
+        inputActions.Player.Exit.performed += _ => QuitGame();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Disable();
     }
 
     public void PlayGame()
