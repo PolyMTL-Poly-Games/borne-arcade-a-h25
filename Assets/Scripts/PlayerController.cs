@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
     private int essenceCount = 0;
     private int essenceThreshold = 3;
 
+    // Respawn at boss
+    public bool isAtBoss = false;
+    public Vector3 bossRespawnPosition = new Vector3(366, -33, 0);
+
     // Input system variables
     private PlayerInputActions inputActions;
     private Vector2 moveInput;
@@ -72,11 +76,13 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         inputActions.Enable();
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         inputActions.Disable();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Update()
@@ -92,15 +98,30 @@ public class PlayerController : MonoBehaviour
         CheckTerrain();
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        transform.position = bossRespawnPosition;
+    }
+
     private void CheckHP()
     {
         if (health <= 0)
         {
-            audioManagerController?.playSound(deathSound);
-            audioManagerController?.ResetTrack();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (!isAtBoss)
+            {
+                audioManagerController?.playSound(deathSound);
+                audioManagerController?.ResetTrack();
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            else
+            {
+                audioManagerController?.playSound(deathSound);
+                audioManagerController?.ResetTrack();
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
+
 
     private void Move()
     {

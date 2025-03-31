@@ -51408,6 +51408,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7858369973303923830, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
   m_PrefabInstance: {fileID: 994661086}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &994661088 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 374715076319851333, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
+  m_PrefabInstance: {fileID: 994661086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7804c2e8187d6b4caf909317a3f8d4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &995012796
 GameObject:
   m_ObjectHideFlags: 0
@@ -60538,6 +60549,7 @@ GameObject:
   - component: {fileID: 1606565086}
   - component: {fileID: 1606565085}
   - component: {fileID: 1606565084}
+  - component: {fileID: 1606565087}
   m_Layer: 0
   m_Name: BossTrigger
   m_TagString: Untagged
@@ -60633,6 +60645,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1606565087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606565083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a680687ae82fc04caaa3ffe3ab945aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 994661088}
 --- !u!1 &1607891583
 GameObject:
   m_ObjectHideFlags: 0
