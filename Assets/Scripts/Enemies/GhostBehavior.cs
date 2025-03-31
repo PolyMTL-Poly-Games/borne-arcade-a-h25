@@ -1,19 +1,17 @@
 using UnityEngine;
 using System.Collections;
 
-public class GhostBehavior : MonoBehaviour
+public class GhostBehavior : EnemyController
 {
-    [SerializeField] private float moveSpeed = 2f; // Movement speed
-    [SerializeField] private float disappearDuration = 3f; // Time ghost stays invisible
-    [SerializeField] private float appearDuration = 5f; // Time ghost stays visible
-    [SerializeField] private Transform leftEdge; // Left patrol edge
-    [SerializeField] private Transform rightEdge; // Right patrol edge
+    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float disappearDuration = 3f;
+    [SerializeField] private float appearDuration = 5f;
+    [SerializeField] private Transform leftEdge;
+    [SerializeField] private Transform rightEdge;
 
-    private bool isVisible = true; // State of the ghost
-    private SpriteRenderer spriteRenderer;
+    private bool canMove = true;
     private Collider2D ghostCollider;
-    private Animator animator;
-    private float direction = 1f; // Moving direction (1 for right, -1 for left)
+    private float direction = 1f;
 
     private void Start()
     {
@@ -26,7 +24,7 @@ public class GhostBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (isVisible)
+        if (canMove)
         {
             Move();
         }
@@ -34,20 +32,17 @@ public class GhostBehavior : MonoBehaviour
 
     private void Move()
     {
-        // Flip the sprite based on direction
         spriteRenderer.flipX = direction > 0;
 
-        // Move the ghost
         transform.Translate(Vector2.right * moveSpeed * direction * Time.deltaTime);
 
-        // Reverse direction if reaching patrol edges
         if (transform.position.x >= rightEdge.position.x && direction > 0)
         {
-            direction = -1f; // Start moving left
+            direction = -1f;
         }
         else if (transform.position.x <= leftEdge.position.x && direction < 0)
         {
-            direction = 1f; // Start moving right
+            direction = 1f;
         }
     }
 
@@ -56,43 +51,27 @@ public class GhostBehavior : MonoBehaviour
         while (true)
         {
             // Disappear
-            isVisible = false;
-            animator.SetTrigger("Disappear");
-            yield return new WaitForSeconds(1f);
-            ghostCollider.enabled = false;
-            spriteRenderer.enabled = false;
+            canMove = false;
+            animator.SetTrigger("disappear");
             yield return new WaitForSeconds(disappearDuration);
 
             // Reappear
-            isVisible = true;
-            ghostCollider.enabled = true;
-            spriteRenderer.enabled = true;
-            animator.SetTrigger("Appear");
+            animator.SetTrigger("reappear");
             yield return new WaitForSeconds(appearDuration);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    // Executed at the end of the disappear animation. See Animation window 
+    public void Disappear()
     {
-        if (collision.gameObject.CompareTag("Player") && isVisible)
-        {
-            // Check if the player is jumping on top of the ghost
-            if (collision.transform.position.y > transform.position.y + 0.5f)
-            {
-                Die();
-                collision.gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, 10f); // Bounce player up
-            }
-            else
-            {
-                collision.gameObject.GetComponent<PlayerController>().Hurt(gameObject);
-            }
-        }
+        ghostCollider.enabled = false;
+        spriteRenderer.enabled = false;
     }
 
-    private void Die()
+    public void Reappear()
     {
-        animator.SetTrigger("Hit");
-        // Disable ghost after hit animation
-        Destroy(gameObject, 0.5f); // Delay to let the animation play
+        ghostCollider.enabled = true;
+        spriteRenderer.enabled = true;
+        canMove = true;
     }
 }
