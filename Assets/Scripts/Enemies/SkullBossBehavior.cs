@@ -21,14 +21,12 @@ public class SkullBossBehavior : EnemyController
     private GameObject[] hearts;
     private bool isEnraged;
     private Coroutine cycleCoroutine;
-    private AudioManagerController audioManagerController;
 
     protected override void Awake()
     {
         base.Awake();
         heartContainer = transform.GetChild(0);
         hitBounceForce = 25f;
-        audioManagerController = FindFirstObjectByType<AudioManagerController>();
     }
 
     private void Start()
@@ -152,8 +150,8 @@ public class SkullBossBehavior : EnemyController
             base.OnHitAnimationEnd();
             SpawnConfetti();
             wall.SetActive(false);
-            audioManagerController?.audioSource.Stop();
-            audioManagerController?.playSound(defeatSound);
+            AudioManagerController.instance?.audioSource.Stop();
+            AudioManagerController.instance?.PlaySound(defeatSound);
         }
         else
         {

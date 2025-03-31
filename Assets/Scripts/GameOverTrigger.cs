@@ -24,6 +24,7 @@ public class GameOverTrigger : MonoBehaviour
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
+        AudioManagerController.instance?.Destroy();
         SceneManager.LoadScene("MainMenuScene");
     }
 }

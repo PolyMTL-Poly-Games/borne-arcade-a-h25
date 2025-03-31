@@ -3,8 +3,8 @@ using UnityEngine.Audio;
 
 public class AudioManagerController : MonoBehaviour
 {
+    public static AudioManagerController instance;
     public AudioSource audioSource;
-    private static AudioManagerController instance;
     private AudioResource startTrack;
 
     void Awake()
@@ -23,7 +23,7 @@ public class AudioManagerController : MonoBehaviour
 
     void Start()
     {
-        startTrack = audioSource.resource;
+        startTrack = transform.GetChild(0).GetComponent<AudioSource>().resource;
     }
 
     public void ChangeTrack(AudioResource newTrack)
@@ -40,9 +40,14 @@ public class AudioManagerController : MonoBehaviour
         ChangeTrack(startTrack);
     }
 
-    public void playSound(AudioClip sound)
+    public void PlaySound(AudioClip sound)
     {
         float volume = 0.75f;
         audioSource.PlayOneShot(sound, volume);
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

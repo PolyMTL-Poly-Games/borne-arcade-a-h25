@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
     private bool jumpPressed;
 
     // Audio
-    private AudioManagerController audioManagerController;
     public AudioClip hurtSound;
     public AudioClip deathSound;
     public AudioClip stompSound;
@@ -63,7 +62,6 @@ public class PlayerController : MonoBehaviour
         groundCheck = transform.Find("GroundCheck");
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        audioManagerController = FindFirstObjectByType<AudioManagerController>();
 
         // Initialize Input Actions
         inputActions = new PlayerInputActions();
@@ -109,14 +107,14 @@ public class PlayerController : MonoBehaviour
         {
             if (!isAtBoss)
             {
-                audioManagerController?.playSound(deathSound);
-                audioManagerController?.ResetTrack();
+                AudioManagerController.instance?.PlaySound(deathSound);
+                AudioManagerController.instance?.ResetTrack();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             else
             {
-                audioManagerController?.playSound(deathSound);
-                audioManagerController?.ResetTrack();
+                AudioManagerController.instance?.PlaySound(deathSound);
+                AudioManagerController.instance?.ResetTrack();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
@@ -158,7 +156,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         ++jumpCount;
-        audioManagerController?.playSound(jumpSound);
+        AudioManagerController.instance?.PlaySound(jumpSound);
     }
 
     private void WallJump()
@@ -169,7 +167,7 @@ public class PlayerController : MonoBehaviour
         else
             rb.linearVelocity = new Vector2(wallPushForce, jumpForce);
 
-        audioManagerController?.playSound(jumpSound);
+        AudioManagerController.instance?.PlaySound(jumpSound);
 
         // Lock movement for a short duration to prevent player from sticking on wall when maintaining input
         Invoke("AllowControl", controlLockTime);
@@ -273,7 +271,7 @@ public class PlayerController : MonoBehaviour
         healthBar.SetHealth(health);
 
         if (health != 0)
-            audioManagerController?.playSound(hurtSound);
+            AudioManagerController.instance?.PlaySound(hurtSound);
 
     }
 
@@ -284,7 +282,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlayStompSound()
     {
-        audioManagerController?.playSound(stompSound);
+        AudioManagerController.instance?.PlaySound(stompSound);
     }
 
     public void EssenceDrain()

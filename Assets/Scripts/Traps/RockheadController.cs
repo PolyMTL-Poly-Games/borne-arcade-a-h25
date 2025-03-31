@@ -3,7 +3,6 @@ using System.Collections;
 
 public class RockheadController : MonoBehaviour
 {
-    [SerializeField] private float groundCheckDistance = 10f;
     [SerializeField] private float dropSpeed = 10f;
     [SerializeField] private float resetSpeed = 2f;
     [SerializeField] private float waitTime = 1f;
