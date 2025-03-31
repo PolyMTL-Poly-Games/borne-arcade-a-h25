@@ -3,6 +3,7 @@ using UnityEngine.Audio;
 
 public class AudioManagerController : MonoBehaviour
 {
+    public AudioSource audioSource;
     private static AudioManagerController instance;
     private AudioResource startTrack;
 
@@ -11,7 +12,7 @@ public class AudioManagerController : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            startTrack = GetComponent<AudioSource>().resource;
+            audioSource = GetComponent<AudioSource>();
             DontDestroyOnLoad(gameObject); // Keep music playing on scene reload
         }
         else
@@ -20,9 +21,13 @@ public class AudioManagerController : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        startTrack = audioSource.resource;
+    }
+
     public void ChangeTrack(AudioResource newTrack)
     {
-        AudioSource audioSource = GetComponent<AudioSource>();
         if (audioSource.resource != newTrack)
         {
             audioSource.resource = newTrack;
@@ -38,6 +43,6 @@ public class AudioManagerController : MonoBehaviour
     public void playSound(AudioClip sound)
     {
         float volume = 0.75f;
-        GetComponent<AudioSource>().PlayOneShot(sound, volume);
+        audioSource.PlayOneShot(sound, volume);
     }
 }

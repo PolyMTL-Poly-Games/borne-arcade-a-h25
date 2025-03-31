@@ -189,12 +189,14 @@ MonoBehaviour:
   confettiPrefab: {fileID: 6324268856477158343, guid: 81237d0fcc3a9c546b79c9885ca72690, type: 3}
   heartPrefab: {fileID: 8120951746793606408, guid: b4e1561a8731e864f9688d360b028b26, type: 3}
   enragedDuration: 8
-  passiveDuration: 2
+  passiveDuration: 5
   followSpeed: 2
   detectionRange: 20
   shootInterval: 1
   particleCount: 12
   particleSpeed: 5
+  wall: {fileID: 0}
+  defeatSound: {fileID: 8300000, guid: c9cd4e2b15560f142bd1262fdf06ae14, type: 3}
 --- !u!60 &2672180174146612446
 PolygonCollider2D:
   m_ObjectHideFlags: 0

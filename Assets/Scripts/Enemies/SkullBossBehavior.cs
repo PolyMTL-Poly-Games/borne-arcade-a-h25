@@ -9,22 +9,26 @@ public class SkullBossBehavior : EnemyController
     [SerializeField] private float enragedDuration = 8f; // Time skull stays enraged
     [SerializeField] private float passiveDuration = 5f; // Time skull stays passive
     [SerializeField] private float followSpeed = 2f;
-    [SerializeField] private float detectionRange = 8f;
+    [SerializeField] private float detectionRange = 20f;
     [SerializeField] private float shootInterval = 1f; // Time between particle bursts
     [SerializeField] private int particleCount = 12; // Number of particles in 360-degree burst
     [SerializeField] private float particleSpeed = 5f; // Speed of each particle
     [SerializeField] private GameObject wall;
+    [SerializeField] private AudioClip defeatSound;
+
     private Transform heartContainer;
     private int maxLife = 3;
     private GameObject[] hearts;
     private bool isEnraged;
     private Coroutine cycleCoroutine;
+    private AudioManagerController audioManagerController;
 
     protected override void Awake()
     {
         base.Awake();
         heartContainer = transform.GetChild(0);
         hitBounceForce = 25f;
+        audioManagerController = FindFirstObjectByType<AudioManagerController>();
     }
 
     private void Start()
@@ -77,7 +81,7 @@ public class SkullBossBehavior : EnemyController
         }
     }
 
-    private void restartCycle()
+    private void RestartCycle()
     {
         if (cycleCoroutine != null)
         {
@@ -148,11 +152,12 @@ public class SkullBossBehavior : EnemyController
             base.OnHitAnimationEnd();
             SpawnConfetti();
             wall.SetActive(false);
-
+            audioManagerController?.audioSource.Stop();
+            audioManagerController?.playSound(defeatSound);
         }
         else
         {
-            restartCycle();
+            RestartCycle();
         }
     }
 
