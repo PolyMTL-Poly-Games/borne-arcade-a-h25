@@ -276,6 +276,14 @@ public class PlayerController : MonoBehaviour
         AudioManagerController.instance?.PlaySound(stompSound);
     }
 
+    // For potion at boss entrance
+    public void FullHeal()
+    {
+        health = maxHealth;
+        healthBar.SetHealth(maxHealth);
+        SpawnHealEffect();
+    }
+
     public void EssenceDrain()
     {
         essenceCount++;
@@ -294,6 +302,11 @@ public class PlayerController : MonoBehaviour
             healthBar.SetHealth(health);
         }
 
+        SpawnHealEffect();
+    }
+
+    private void SpawnHealEffect()
+    {
         if (healEffectPrefab != null)
         {
             GameObject healEffect = Instantiate(healEffectPrefab, transform.position, Quaternion.identity);
