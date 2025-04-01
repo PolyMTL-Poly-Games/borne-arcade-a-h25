@@ -3,11 +3,12 @@
 ## Table of Contents
 
 1. [Description](#description)
-2. [Technologies Used](#technologies-used)
-3. [Getting Started](#getting-started)
+    - [Technologies Used](#technologies-used)
+    - [Live Demo](#live-demo)
+2. [Getting Started](#getting-started)
     - [Installation](#installation)
     - [Controls](#controls)
-4. [Team](#team)
+3. [Team](#team)
 
 ## Description
 
@@ -24,6 +25,13 @@ This short game is a 2D platformer where players must overcome various obstacles
 -   Language
 
     [![C#](https://custom-icon-badges.demolab.com/badge/C%23-%23239120.svg?logo=cshrp&logoColor=white)](https://learn.microsoft.com/en-us/dotnet/csharp/)
+
+### Live Demo
+
+You can view the web version of the deployed project here:  
+https://polymtl-poly-games.github.io/borne-arcade-a-h25/
+
+**Note:** The performance may be suboptimal on the web version.
 
 ## Getting Started
 
