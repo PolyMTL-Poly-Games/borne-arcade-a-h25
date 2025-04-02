@@ -55,6 +55,7 @@ git clone https://github.com/PolyMTL-Poly-Games/borne-arcade-a-h25.git
 -   Move: Arrow keys / WASD
 -   Jump: Spacebar
 -   Return to the main menu: Esc
+-   Wall stick: Hold the movement key towards the wall to cling to it
 
 ## Team
 
