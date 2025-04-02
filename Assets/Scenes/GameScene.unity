@@ -53471,6 +53471,10 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6096109837352319966, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6164688476684712634, guid: 96095a3e48cc6ac45972e70b377d82fc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
