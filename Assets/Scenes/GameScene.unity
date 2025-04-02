@@ -13840,7 +13840,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1420261306304412703, guid: 61c1cdb9f6b40984e8a36f554f1c5c8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 245.68
+      value: 247.53
       objectReference: {fileID: 0}
     - target: {fileID: 1420261306304412703, guid: 61c1cdb9f6b40984e8a36f554f1c5c8a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -56895,16 +56895,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 1458975105}
     m_Modifications:
     - target: {fileID: 3051578236001288562, guid: 335cbf9c0c91cb44f9e17cd259a9c2e9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.6688
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051578236001288562, guid: 335cbf9c0c91cb44f9e17cd259a9c2e9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.6688
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051578236001288562, guid: 335cbf9c0c91cb44f9e17cd259a9c2e9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.6688
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051578236001288562, guid: 335cbf9c0c91cb44f9e17cd259a9c2e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 75.340004
+      value: 81.222
       objectReference: {fileID: 0}
     - target: {fileID: 3051578236001288562, guid: 335cbf9c0c91cb44f9e17cd259a9c2e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.006429
+      value: -4.21
       objectReference: {fileID: 0}
     - target: {fileID: 3051578236001288562, guid: 335cbf9c0c91cb44f9e17cd259a9c2e9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.026927125
+      value: -0.071862
       objectReference: {fileID: 0}
     - target: {fileID: 3051578236001288562, guid: 335cbf9c0c91cb44f9e17cd259a9c2e9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -56934,9 +56946,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4064237826384562418, guid: 335cbf9c0c91cb44f9e17cd259a9c2e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.37
+      objectReference: {fileID: 0}
     - target: {fileID: 8510261388156245708, guid: 335cbf9c0c91cb44f9e17cd259a9c2e9, type: 3}
       propertyPath: m_Name
       value: Mushroom (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602332190220303798, guid: 335cbf9c0c91cb44f9e17cd259a9c2e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -59993,7 +60013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8219230845292173070, guid: d233da8ff21ffc642a1b8a6152557f16, type: 3}
       propertyPath: jumpForce
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8219230845292173070, guid: d233da8ff21ffc642a1b8a6152557f16, type: 3}
       propertyPath: followSpeed
